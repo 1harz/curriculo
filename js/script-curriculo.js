@@ -19,8 +19,7 @@ darkModeToggle.addEventListener('click', function() {
     }
 });
 
-//Funcao da funcionalidade carrossel no hero
-
+// Funcao da funcionalidade carrossel no hero
 let currentImageIndex = 0;
 const images = document.querySelectorAll('.carousel-images img');
 const indicators = document.querySelectorAll('.indicator');
@@ -46,7 +45,7 @@ indicators.forEach(indicator => {
     });
 });
 
-setInterval(nextImage, 3000); //3 segundos (3000ms) para trocar a imagem
+setInterval(nextImage, 3000); // 3 segundos (3000ms) para trocar a imagem
 
 // Funcao da funcionalidade de voltar ao topo
 const backToTopButton = document.getElementById('back-to-top');
@@ -54,7 +53,7 @@ const backToTopButton = document.getElementById('back-to-top');
 window.addEventListener('scroll', function() {
     if (window.scrollY > 200) {
         backToTopButton.classList.add('show');
-    }else {
+    } else {
         backToTopButton.classList.remove('show');
     }
 });
@@ -66,8 +65,7 @@ backToTopButton.addEventListener('click', function() {
     });
 });
 
-//Funcao que calcula a idade para manter atualizado no html
-
+// Funcao que calcula a idade para manter atualizado no html
 function calcularIdade(dataNascimento) {
     const hoje = new Date();
     const nascimento = new Date(dataNascimento);
@@ -80,22 +78,31 @@ function calcularIdade(dataNascimento) {
 const idade = calcularIdade("2002-07-05");
 document.getElementById("idade").textContent = idade;
 
-document.getElementById('hamburger-menu').addEventListener('click', function() {
+// Funcionalidade do menu hamburguer
+const hamburgerMenu = document.getElementById('hamburger-menu');
+
+hamburgerMenu.addEventListener('click', function() {
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('open');
 });
 
+document.addEventListener('click', function(event) {
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (!hamburgerMenu.contains(event.target) && !navLinks.contains(event.target)) {
+        navLinks.classList.remove('open');
+    }
+});
+
 window.addEventListener('resize', function() {
     const navLinks = document.querySelector('.nav-links');
-    const hamburgerMenu = document.getElementById('hamburger-menu');
-    
+
     if (window.innerWidth > 576 && navLinks.classList.contains('open')) {
         navLinks.classList.remove('open');
     }
 });
 
-//Funcao que mantem o alinhamento
-
+// Funcao que mantem o alinhamento
 window.onload = function() {
     stickFooter();
 };
@@ -115,4 +122,3 @@ function stickFooter() {
         footer.classList.remove('sticky-footer');
     }
 }
-
