@@ -1,0 +1,828 @@
+/* Estilos globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos gerais do header */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.spaced-section {
+    margin-bottom: 60px;
+}
+
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.sticky-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Estilo do título */
+header h1 {
+    font-family: "Racing Sans One", sans-serif;
+    font-size: 1.8rem;
+    color: #007aff;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    position: relative;
+    animation: racingEffect 2s infinite linear;
+    overflow: hidden;
+}
+
+/* Efeito de animação no título */
+@keyframes spark {
+    0% {
+        left: -150px;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+header h1::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -150px;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    animation: spark 3s infinite linear;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #007aff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    background-color: #007aff;
+    color: #fff;
+}
+
+/* Estilo do menu hamburguer */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #007aff;
+    border-radius: 5px;
+}
+
+.nav-links.open {
+    display: block;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links.open li {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Estilo do hero - fotos e texto introdutorio */
+
+#hero {
+    position: relative;
+    width: 60%;
+    height: 600px;
+    overflow: hidden;
+    margin-top: 120px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.carousel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-images img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-images img.active {
+    opacity: 1;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.indicator.active {
+    opacity: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+#hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#hero p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cursor {
+    display: inline-block;
+    animation: blink 1s step-start infinite;
+}
+
+#hero-contact-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+#hero-contact-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo da sessao sobre */
+
+#sobre{
+    margin-bottom: -7%;
+}
+
+#sobre h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #007aff;
+    position: relative;
+}
+
+#sobre h2::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background-color: #007aff;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+#sobre p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+/* Estilo da sessao de experiencia */
+#experiencia {
+    padding: 60px 20px;
+    margin-bottom: -5%;
+}
+
+#experiencia h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #007aff;
+    position: relative;
+}
+
+#experiencia h2::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background-color: #007aff;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.experience-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card-header img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.card-header h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+
+.experience-details {
+    list-style: none;
+    padding: 0;
+}
+
+.experience-details li {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Estilo da sessao habilidades */
+
+#habilidades{
+    margin-bottom: -5%;
+}
+
+#habilidades h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #007aff;
+    position: relative;
+}
+
+#habilidades h2::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background-color: #007aff;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+.skills-list {
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style-type: none;
+    margin-top: -2%;
+}
+
+.skills-list li {
+    background: linear-gradient(135deg, #007aff, #00b8ff);
+    color: #fff;
+    padding: 12px 30px;
+    margin: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.skills-list li:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo do portifolio */
+
+#portifolio h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #007aff;
+    position: relative;
+}
+
+#portifolio h2::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 4px;
+    background-color: #007aff;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+.portifolio-description {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #666;
+}
+  
+.portifolio-button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+  
+.portifolio-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.portifolio-section {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+/* Estilo do contato */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: auto;
+}
+
+#contact-form label {
+    font-weight: bold;
+    color: #007aff;
+    margin-bottom: 5px;
+}
+
+#contact-form input,
+#contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #007aff;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    border-color: #005bb5;
+    outline: none;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"] {
+    height: 40px;
+}
+
+#contact-form textarea {
+    height: 150px;
+    resize: none;
+    overflow-y: auto;
+}
+
+#contact-form button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#contact-form button:hover {
+    background-color: #218838;
+}
+
+#contato{
+    margin-top: -7%;
+}
+
+/* Outros contatos */
+
+#outros_contatos {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+#outros_contatos h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#outros_contatos ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#outros_contatos li {
+    margin: 10px 0;
+}
+
+#outros_contatos a {
+    text-decoration: none;
+    color: #007aff;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+#outros_contatos a:hover {
+    color: #005bb5;
+}
+
+#outros_contatos img {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Estilo do botao de voltar para cima */
+
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.1);
+}
+
+#back-to-top:hover {
+    background-color: #005bb5;
+}
+
+@media (max-width: 576px) {
+    .nav-links {
+        flex-direction: column;
+    }
+
+    #experiencia h2 {
+        font-size: 2rem;
+    }
+
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .portifolio-section {
+        padding: 60px 10px;
+    }
+  
+    .section-title {
+        font-size: 28px;
+    }
+  
+    .portifolio-button {
+        font-size: 18px;
+        padding: 12px 25px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+}
+
+/* Funcionalidade Modo escuro */
+
+body.dark-mode #portifolio h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode footer {
+    background-color: #141414;
+    color: #f5f5f5;
+}
+
+body.dark-mode footer a {
+    color: #f5f5f5;
+}
+
+body.dark-mode footer a:hover {
+    color: #dddddd;
+}
+
+body.dark-mode footer p {
+    color: #bbbbbb;
+}
+
+body.dark-mode #habilidades h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode #experiencia {
+    background-color: #121212;
+}
+
+body.dark-mode #experiencia h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode #sobre h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode .experience-card {
+    background-color: #333;
+}
+
+body.dark-mode .card-header h3,
+body.dark-mode .experience-details li {
+    color: #f5f5f5;
+}
+
+body.dark-mode #contato {
+    background-color: #121212;
+}
+
+body.dark-mode #contato h2 {
+    color: #f5f5f5;
+}
+
+body.dark-mode #contato form input,
+body.dark-mode #contato form textarea {
+    background-color: #333;
+    color: #f5f5f5;
+    border: 1px solid #333;
+}
+
+body.dark-mode #contato form input::placeholder,
+body.dark-mode #contato form textarea::placeholder {
+    color: #888;
+}
+
+body.dark-mode #contato form button {
+    background-color: #28a745;
+    color: #f5f5f5;
+    border: 1px solid #28a745;
+}
+
+body.dark-mode #contato form button:hover {
+    background-color: #218838;
+}
+
+#dark-mode-toggle {
+    background-color: #005bb5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#dark-mode-toggle:hover {
+    background-color: #005bb5;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+body.dark-mode header {
+    background: rgba(18, 18, 18, 0.9);
+}
+
+body.dark-mode .nav-links a {
+    color: #f5f5f5;
+}
+
+body.dark-mode .nav-links a:hover {
+    background-color: #f5f5f5;
+    color: #007aff;
+}
+
+body.dark-mode #hero {
+    background-color: #333;
+}
+
+body.dark-mode footer {
+    background-color: #333;
+}
+
+body.dark-mode #hero-contact-btn {
+    background-color: #005bb5;
+    color: #fff;
+}
+
+body.dark-mode #hero-contact-btn:hover {
+    background-color: #007aff;
+}
+
+body.dark-mode .skills-list li {
+    background: linear-gradient(135deg, #005bb5, #007aff);
+}
+
+body.dark-mode .portifolio-item {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode .portifolio-item h3 {
+    color: #00b8ff;
+}
+
+body.dark-mode .portifolio-item a {
+    color: #00b8ff;
+}
+
+body.dark-mode .portifolio-item a:hover {
+    color: #007aff;
+}
+
+body.dark-mode #back-to-top {
+    background-color: #005bb5;
+}
+
+body.dark-mode #outros_contatos {
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+body.dark-mode #outros_contatos h3 {
+    color: #f5f5f5;
+}
+
+.dark-mode .portifolio-section {
+    background-color: #121212;
+}
+
+.dark-mode .portifolio-description {
+    color: #f5f5f5;
+}
+.dark-mode .portifolio-button {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+  
+.dark-mode .portifolio-button:hover {
+    background-color: #555;
+}
+
+body.dark-mode .nav-links.open {
+    background-color: #121212;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
