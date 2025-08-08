@@ -278,6 +278,29 @@ function init3DParallax() {
   });
 }
 
+function calcularIdade(dataNascimento) {
+    const hoje = new Date();
+    const nascimento = new Date(dataNascimento);
+    
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+    
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--;
+    }
+    
+    return idade;
+}
+
+const dataNascimento = '2002-07-05';
+
+document.addEventListener('DOMContentLoaded', function() {
+    const idadeElemento = document.getElementById('idade');
+    if (idadeElemento) {
+        idadeElemento.textContent = calcularIdade(dataNascimento);
+    }
+});
+
 window.addEventListener('load', init3DParallax);
 
 function initSkillsCards() {
