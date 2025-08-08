@@ -176,6 +176,22 @@ function applySavedTheme() {
     }
 }
 
+function initDarkMode() {
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    document.documentElement.setAttribute('data-theme', 'dark');
+    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    
+    darkModeToggle.addEventListener('click', function() {
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    });
+}
+
 applySavedTheme();
 
 darkModeToggle.addEventListener('click', function() {
