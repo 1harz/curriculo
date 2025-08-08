@@ -9,22 +9,25 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>📑</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/curriculo.css">
 </head>
 
 <body>
-    <!-- Menu Superior -->
     <header>
         <nav>
             <h1>Raul Falluh</h1>
             <ul class="nav-links">
-                <li><a href="#sobre">Sobre Mim</a></li>
-                <li><a href="#experiencia">Experiência</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
-                <li><a href="#portifolio">Portifólio</a></li>
-                <li><a href="#contato">Contato</a></li>
-                <li><button id="dark-mode-toggle">Modo Escuro</button></li>
+                <li><a href="#sobre" data-i18n="about">Sobre Mim</a></li>
+                <li><a href="#experiencia" data-i18n="experience">Experiência</a></li>
+                <li><a href="#habilidades" data-i18n="skills">Habilidades</a></li>
+                <li><a href="#portifolio" data-i18n="portfolio">Portifólio</a></li>
+                <li><a href="#contato" data-i18n="contact">Contato</a></li>
+                <li>
+                    <button id="language-toggle">EN</button>
+                </li>
+                <li><button id="dark-mode-toggle"><i class="fas fa-moon"></i></button></li>
             </ul>
             <div class="hamburger-menu" id="hamburger-menu">
                 <span></span>
@@ -34,165 +37,305 @@
         </nav>
     </header>
     
-    <!-- Area das fotos e texto inicial -->
     <section id="hero">
-        <div class="carousel">
-            <div class="carousel-images">
-                <img src="img/carrossel1.jpeg" alt="Imagem 1" class="active">
-                <img src="img/carrossel2.jpeg" alt="Imagem 2">
-                <img src="img/carrossel3.jpeg" alt="Imagem 3">
+        <div class="hero-3d-container">
+            <div class="hero-content" data-depth="0.2">
+            <div class="hero-text">
+                <h2 data-i18n="hero_title">Olá, eu sou o Raul. Um entusiasta e estudante de TI<span class="cursor">|</span></h2>
+                <p data-i18n="hero_subtitle">&lt;&gt; Entusiasta em desenvolvimento de soluções que resolvam problemas de forma eficaz e eficiente utilizando a tecnologia &lt;/&gt;.</p>
+                <div class="hero-buttons">
+                <a href="#contato" class="btn-primary" data-i18n="contact_me">Entre em Contato</a>
+                <a href="#experiencia" class="btn-secondary" data-i18n="view_experience">Ver Experiência</a>
+                </div>
             </div>
-            <div class="carousel-indicators">
-                <span class="indicator active" data-index="0"></span>
-                <span class="indicator" data-index="1"></span>
-                <span class="indicator" data-index="2"></span>
+            </div>
+            <div class="hero-image-container" data-depth="0.4">
+            <div class="image-frame">
+                <img src="img/perfil.png" alt="Raul Falluh">
+            </div>
             </div>
         </div>
-        <div class="hero-content">
-            <h2>Olá, eu sou o Raul. Um entusiasta e estudante de TI<span class="cursor">|</span></h2>
-            <p>&lt;&gt; Entusiasta em desenvolvimento de soluções que resolvam problemas de forma eficaz e eficiente utilizando a tecnologia &lt;/&gt;.</p>
-            <a href="#contato" class="btn-primary" id="hero-contact-btn">Entre em Contato</a>
+        <div class="scroll-indicator">
+            <span data-i18n="scroll_down">Role para baixo</span>
+            <i class="fas fa-chevron-down"></i>
         </div>
     </section>
 
-    <!-- Sobre mim -->
-    <section id="sobre">
-        <h2>Quem sou eu?</h2>
-        <p>
-            Meu nome é <span>Raul Fragoso</span>, tenho <span id="idade"></span> anos e sou natural de Brasília. Concluí o ensino básico no Centro Educacional Leonardo da Vinci e, atualmente, estou fazendo dois bacharelados, 
-            um no Centro Universitário de Brasília - CEUB e outro na Universidade de Brasília - UnB 📑.
-        </p>
+    <section id="sobre" class="fade-in">
+        <div class="section-container">
+            <h2 data-i18n="about_title">Quem sou eu?</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p data-i18n="about_text1">
+                        Meu nome é <span>Raul Fragoso</span>, tenho <span id="idade"></span> anos e sou natural de Brasília. Concluí o ensino básico no Centro Educacional Leonardo da Vinci e, atualmente, estou fazendo dois bacharelados, 
+                        um no Centro Universitário de Brasília - CEUB e outro na Universidade de Brasília - UnB 📑.
+                    </p>
 
-        <p>
-            Tenho como objetivo principal me inserir em um ambiente onde eu possa aplicar e desenvolver minhas habilidades em desenvolvimento de software. Nesse sentido, 
-            minha meta é adquirir experiência prática em um ambiente profissional dinâmico, contribuindo com projetos inovadores que otimizem processos e melhorem a experiência 
-            dos usuários. Estou motivado a aprender novas tecnologias e colaborar em equipes, visando crescimento profissional no campo de TI.
-        </p>
+                    <p data-i18n="about_text2">
+                        Tenho como objetivo principal me inserir em um ambiente onde eu possa aplicar e desenvolver minhas habilidades em desenvolvimento de software. Nesse sentido, 
+                        minha meta é adquirir experiência prática em um ambiente profissional dinâmico, contribuindo com projetos inovadores que otimizem processos e melhorem a experiência 
+                        dos usuários. Estou motivado a aprender novas tecnologias e colaborar em equipes, visando crescimento profissional no campo de TI.
+                    </p>
 
-        <p>
-            Não deixe de entrar em contato, será um prazer te conhecer! 👊
-        </p>
+                    <p data-i18n="about_text3">
+                        Não deixe de entrar em contato, será um prazer te conhecer! 👊
+                    </p>
+                </div>
+                <div class="about-image">
+                    <img src="img/sobre.png" alt="Sobre Raul">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Habilidades -->
-    <section id="habilidades">
-        <h2>Habilidades</h2>
-        <ul class="skills-list">
-            <li>HTML & CSS</li>
-            <li>JavaScript</li>
-            <li>Python</li>
-            <li>Git & GitHub</li>
-            <li>Java</li>
-            <li>C Básico</li>
-            <li>MySQL</li>
-            <li>VueJS</li>
-            <li>ReactJS</li>
-            <li>Node</li>
-            <li>GoLang</li>
-            <li>Pacote Office</li>
-            <li>Windows</li>
-            <li>Linux</li>
-            <li>Vegas PRO</li>
-            <li>After Effects</li>
-            <li>Bootstrap</li>
-            <li>Manutenção de Hardware</li>
-            <li>Básico de PowerApps</li>
-        </ul>
+    <section id="habilidades" class="fade-in">
+        <div>
+        <h2 class="section-title" data-i18n="skills_title">Habilidades</h2>
+        
+        <div class="skills-cards-container">
+            <div class="skills-card">
+                <div class="card-face card-front">
+                    <div class="card-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 data-i18n="frontend">Frontend</h3>
+                </div>
+                <div class="card-face card-back">
+                    <ul class="skills-list">
+                        <li>HTML & CSS</li>
+                        <li>JavaScript</li>
+                        <li>VueJS</li>
+                        <li>ReactJS</li>
+                        <li>Bootstrap</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="skills-card">
+                <div class="card-face card-front">
+                    <div class="card-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 data-i18n="backend">Backend</h3>
+                </div>
+                <div class="card-face card-back">
+                    <ul class="skills-list">
+                        <li>Python</li>
+                        <li>Java</li>
+                        <li>Node.js</li>
+                        <li>GoLang</li>
+                        <li>C Básico</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="skills-card">
+                <div class="card-face card-front">
+                    <div class="card-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 data-i18n="tools">Ferramentas</h3>
+                </div>
+                <div class="card-face card-back">
+                    <ul class="skills-list">
+                        <li>Git & GitHub</li>
+                        <li>MySQL</li>
+                        <li>PowerApps</li>
+                        <li>Windows</li>
+                        <li>Linux</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="skills-card">
+                <div class="card-face card-front">
+                    <div class="card-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 data-i18n="others">Outros</h3>
+                </div>
+                <div class="card-face card-back">
+                    <ul class="skills-list">
+                        <li>Pacote Office</li>
+                        <li>Vegas PRO</li>
+                        <li>After Effects</li>
+                        <li>Manutenção de Hardware</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-controls">
+            <button id="flip-all-cards" class="btn-secondary">
+                <i class="fas fa-sync-alt"></i> <span data-i18n="flip_all_cards">Virar Todas as Cartas</span>
+            </button>
+        </div>
     </section>
 
-    <!-- Experiências / Formação -->
-    <section id="experiencia">
-        <h2>Experiência</h2>
-        <div class="experience-grid">
-            <div class="experience-card">
-                <div class="card-header">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Marca-ceub-versao-positiva-lilas-1024x791.png/776px-Marca-ceub-versao-positiva-lilas-1024x791.png" alt="Logo CEUB" class="logo">
-                    <h3>Bacharelado em Ciências da Computação</h3>
+    <section id="experiencia" class="fade-in">
+        <div class="section-container">
+            <h2 data-i18n="experience_title">Experiência</h2>
+            <div class="experience-cards">
+                <div class="experience-card">
+                    <div class="card-header">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Marca-ceub-versao-positiva-lilas-1024x791.png/776px-Marca-ceub-versao-positiva-lilas-1024x791.png" alt="CEUB" class="logo">
+                        <div>
+                            <h3 data-i18n="degree1">Bacharelado em Ciências da Computação</h3>
+                            <span class="card-date" data-i18n="present">2023-Presente</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="degree1_desc">Centro Universitário de Brasília - CEUB, atualmente no 5º semestre</p>
+                        <ul class="card-details" style="margin-top: 8.5em;">
+                            <li><i class="fas fa-graduation-cap"></i> Bacharelado</li>
+                            <li><i class="fas fa-calendar-alt"></i> 2023 - Presente</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Brasília, DF</li>
+                        </ul>
+                    </div>
                 </div>
-                <ul class="experience-details">
-                    <li>.Centro Universitário de Brasília - CEUB</li>
-                    <li>.Atualmente no 5º semestre</li>
-                </ul>
-            </div>
-            <div class="experience-card">
-                <div class="card-header">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg/800px-Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg.png" alt="Logo UnB" class="logo">
-                    <h3>Bacharelado em Engenharia de Software</h3>
+                
+                <div class="experience-card">
+                    <div class="card-header">
+                        <i class="fas fa-certificate card-icon"></i>
+                        <div>
+                            <h3 data-i18n="experience_title2">Experiências e Certificados</h3>
+                            <span class="card-date">2023 - presente</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p data-i18n="experience1">Freelancer em Edição de Vídeos (17 a 20 anos) e como programador Web</p>
+                        <p data-i18n="experience2">Certificado de cursos em C, Python, HTML e CSS e outros em andamento</p>
+                        <ul class="card-details">
+                            <li><i class="fas fa-briefcase"></i> Freelancer</li>
+                            <li><i class="fas fa-certificate"></i> Vários certificados</li>
+                        </ul>
+                    </div>
                 </div>
-                <ul class="experience-details">
-                    <li>.Universidade de Brasília - UnB</li>
-                    <li>.Atualmente no 5º semestre</li>
-                </ul>
-            </div>
-            <div class="experience-card">
-                <h3><span style="font-size: 1.3em;">Experiências e Certificados</span></h3>
-                <br><br><br>
-                <p>.Freelancer em Edição de Vídeos (17 a 20 anos) e como programador Web</p>
-                <p>.Certificado de cursos em C, Python, HTML e CSS</p>
             </div>
         </div>
     </section>    
 
-    <!-- Portifolio redirecionando para o git -->
-
-    <section id="portifolio" class="portifolio-section">
-        <div class="container">
-          <h2 class="section-title">Portifólio</h2>
-          <p class="portifolio-description">
-            Confira meus projetos diretamente no GitHub clicando no link abaixo.
-          </p>
-          <a href="https://github.com/1harz" target="_blank" class="portifolio-button">
-            Meu GitHub
-          </a>
+    <section id="portifolio" class="fade-in">
+        <div class="section-container">
+            <h2 data-i18n="portfolio_title">Portifólio</h2>
+            <p class="portfolio-description" data-i18n="portfolio_desc">
+                Confira meus projetos diretamente no GitHub clicando no link abaixo.
+            </p>
+            <div class="portfolio-content">
+                <div class="portfolio-card">
+                    <div class="portfolio-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub</h3>
+                    <p data-i18n="portfolio_github_desc">Todos meus projetos open-source e contribuições</p>
+                    <a href="https://github.com/1harz" target="_blank" class="btn-primary" data-i18n="visit_github">Visitar GitHub</a>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 data-i18n="projects">Projetos</h3>
+                    <p data-i18n="portfolio_projects_desc">Diversos projetos pessoais e acadêmicos</p>
+                    <a href="#contato" class="btn-secondary" data-i18n="request_access">Solicitar Acesso</a>
+                </div>
+            </div>
         </div>
-      </section>
-      
-
-    <!-- Parte do contato -->
-    <section id="contato">
-        <h3>Contato</h3>
-        <form id="contact-form" action="https://formsubmit.co/harzgeral@gmail.com" method="POST">
-            <input type="hidden" name="_next" value="#">
-            <input type="hidden" name="_subject" value="Novo contato do formulário">
+    </section>
     
-            <label for="name">Nome:</label>
-            <input type="text" id="name" name="name" required>
-    
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-    
-            <label for="message">Mensagem:</label>
-            <textarea id="message" name="message" required></textarea>
-    
-            <button type="submit" class="btn-primary">Enviar</button>
-        </form>
+    <section id="contato" class="fade-in">
+        <div class="section-container">
+            <h2 data-i18n="contact_title">Contato</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 data-i18n="get_in_touch">Entre em contato</h3>
+                    <p data-i18n="contact_text">Estou interessado em oportunidades de trabalho, projetos freelance ou apenas bater um papo sobre tecnologia.</p>
+                    
+                    <ul class="contact-list">
+                        <li>
+                            <a href="https://wa.me/5561984078564" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                                <span data-i18n="whatsapp">(61) 98407-8564</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:raulfalluh@gmail.com">
+                                <i class="fas fa-envelope"></i>
+                                <span>raulfalluh@gmail.com</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/raulfalluh/" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                                <span data-i18n="linkedin">linkedin.com/in/raulfalluh</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/1harz" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>github.com/1harz</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <form id="contact-form" action="https://formsubmit.co/harzgeral@gmail.com" method="POST">
+                    <input type="hidden" name="_next" value="#">
+                    <input type="hidden" name="_subject" value="Novo contato do formulário">
+                    <input type="hidden" name="_language" value="pt-BR">
+            
+                    <div class="form-group">
+                        <label for="name" data-i18n="name">Nome:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="email" data-i18n="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="message" data-i18n="message">Mensagem:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+            
+                    <button type="submit" class="btn-primary" data-i18n="send">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
     </section>
 
-    <div id="outros_contatos">
-        <h3>Outras formas de contato</h3>
-        <ul>
-            <li>
-                <a href="https://wa.me/5561984078564" target="_blank">
-                    <img src="https://static.vecteezy.com/system/resources/previews/016/716/480/original/whatsapp-icon-free-png.png" alt="WhatsApp" style="width: 20px; vertical-align: middle;">
-                    WhatsApp: (61) 98407-8564
-                </a>
-            </li>
-            <li>
-                <a href="mailto:harzgeral@gmail.com">
-                    <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Email" style="width: 20px; vertical-align: middle;">
-                    Email: raulfalluh@gmail.com
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <footer>
-        <p>© 2025 Raul Falluh. Todos os direitos reservados.</p>
+    <footer class="fade-in">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Raul Falluh</h2>
+                <p data-i18n="footer_tagline">Desenvolvedor e Estudante de TI</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#sobre" data-i18n="about">Sobre</a></li>
+                    <li><a href="#habilidades" data-i18n="skills">Habilidades</a></li>
+                    <li><a href="#experiencia" data-i18n="experience">Experiência</a></li>
+                    <li><a href="#portifolio" data-i18n="portfolio">Portifólio</a></li>
+                    <li><a href="#contato" data-i18n="contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/1harz" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/seu-perfil" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:raulfalluh@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://wa.me/5561984078564" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© <span id="current-year"></span> Raul Falluh. <span data-i18n="rights">Todos os direitos reservados.</span></p>
+        </div>
     </footer>
 
     <!-- Botão de voltar ao topo -->
-    <button id="back-to-top">&#8679;</button>
-
+    <button id="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script src="js/script-curriculo.js"></script>
+    <script src="js/i18n.js"></script>
 </body>
 </html>
