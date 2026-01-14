@@ -1,23 +1,110 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Currículo - Página Inicial</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>👋</text></svg>">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Raul Falluh | Dev Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Olá, eu sou o Raul <span class="cursor">|</span></h2></h1>
-        <button id="start-button" class="btn-large">Ver Currículo</button>
+    <div class="monitor-overlay"></div>
+    <div class="scanline"></div>
+
+    <div id="loading-screen">
+        <div class="terminal-loader">
+            <div class="terminal-header">
+                <span class="terminal-title">SYSTEM_BOOT</span>
+            </div>
+            <div class="terminal-body">
+                <p>> INITIALIZING CORE SYSTEMS...</p>
+                <p>> LOADING SKILLS_DATABASE...</p>
+                <p>> COMPILING EXPERIENCE_MODULES...</p>
+                <p>> ESTABLISHING CONNECTION...</p>
+                <p class="blink">_</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
     </div>
-    
-    <canvas id="background-canvas"></canvas>
 
-    <div class="fade-out-overlay"></div>
+    <main id="game-ui" class="hidden">
+        <div class="profile-container">
+            <div class="profile-card" id="profile-card">
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <div class="avatar-frame">
+                        <img src="img/perfil.png" alt="Player Avatar" class="pixel-avatar">
+                        <div class="level-badge">LVL <span>23</span></div>
+                    </div>
+                    <h1 class="player-name">RAUL FALLUH</h1>
+                    <h2 class="player-class">&lt; FULL_STACK_DEV /&gt;</h2>
 
-    <script src="js/script.js"></script>
+                    <div class="stats-grid">
+                        <div class="stat-row">
+                            <span class="stat-label">STR (Code)</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">AGI (Learn)</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">INT (Logic)</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">LUCK (Debug)</span>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-container">
+                <div class="system-status">
+                    <p>STATUS: <span class="status-online">ONLINE</span></p>
+                    <p>LOCATION: <span class="location">BRASÍLIA_DF</span></p>
+                    <p>CURRENT_OBJECTIVE: <span class="objective">LEARN</span></p>
+                </div>
+
+                <nav class="main-menu">
+                    <a href="curriculo.html" class="menu-item active" data-sound="hover">
+                        <span class="arrow">></span> START GAME
+                    </a>
+                    <a href="curriculo.html#experiencia" class="menu-item" data-sound="hover">
+                        <span class="arrow">></span> LOAD LEVEL (EXP)
+                    </a>
+                    <a href="curriculo.html#habilidades" class="menu-item" data-sound="hover">
+                        <span class="arrow">></span> SKILLS
+                    </a>
+                    <a href="curriculo.html#contato" class="menu-item" data-sound="hover">
+                        <span class="arrow">></span> MULTIPLAYER (CONTACT)
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <div class="background-grid"></div>
+    <script src="js/landing.js"></script>
 </body>
+
 </html>
