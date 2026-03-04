@@ -23,6 +23,7 @@ const i18n = {
         sec_skills: "TECNOLOGIAS",
         sg_frontend: "Frontend",
         sg_backend: "Backend",
+        sg_mobile: "Mobile",
         sg_tools: "Ferramentas",
         sg_others: "Outros",
         sec_experience: "EXPERIÊNCIA",
@@ -77,6 +78,7 @@ const i18n = {
         sec_skills: "TECH STACK",
         sg_frontend: "Frontend",
         sg_backend: "Backend",
+        sg_mobile: "Mobile",
         sg_tools: "Tools",
         sg_others: "Others",
         sec_experience: "EXPERIENCE",
@@ -420,6 +422,7 @@ if (skillsWrap && hoverImgWrap) {
     const tags = {
         'frontend': 'UI/UX_RENDER',
         'backend': 'CORE_SYS_ACTIVE',
+        'mobile': 'MOBILE_SYNC',
         'tools': 'INFRA_READY',
         'others': 'ARCH_SOLID'
     };

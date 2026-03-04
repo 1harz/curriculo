@@ -1,26 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></hrz></title>
-    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="img/favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="img/favicon.svg" sizes="any" type="image/svg+xml" />
     <!-- Tech style typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-</head>
+  </head>
 
-<body class="loading">
+  <body class="loading">
     <div class="noise"></div>
     <div class="grid-overlay"></div>
 
@@ -30,366 +30,521 @@
 
     <!-- Loader -->
     <div class="loader">
-        <div class="loader-content">
-            <div class="loader-scramble code-font" id="loader-scramble">INITIALIZING...</div>
-            <div class="loader-counter code-font">00</div>
-            <div class="loader-text" data-i18n="loader">SYSTEM_INITIATION</div>
-            <div class="loader-bar-wrap">
-                <div class="loader-bar"></div>
-            </div>
+      <div class="loader-content">
+        <div class="loader-scramble code-font" id="loader-scramble">
+          INITIALIZING...
         </div>
+        <div class="loader-counter code-font">00</div>
+        <div class="loader-text" data-i18n="loader">SYSTEM_INITIATION</div>
+        <div class="loader-bar-wrap">
+          <div class="loader-bar"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Navigation -->
     <nav class="nav">
-        <div class="nav-logo code-font">&lt;HRZ/&gt;</div>
-        <div class="nav-links">
-            <a href="#about" class="nav-link" data-i18n="nav_about">// ABOUT</a>
-            <a href="#directives" class="nav-link" data-i18n="nav_directives">// DIRECTIVES</a>
-            <a href="#skills" class="nav-link" data-i18n="nav_skills">// TECH STACK</a>
-            <a href="#experience" class="nav-link" data-i18n="nav_experience">// EXPERIENCE</a>
-            <a href="#contact" class="nav-link" data-i18n="nav_contact">// CONTACT</a>
-            <button class="lang-toggle code-font magnetic-btn" id="lang-toggle">EN</button>
-        </div>
+      <div class="nav-logo code-font">&lt;HRZ/&gt;</div>
+      <div class="nav-links">
+        <a href="#about" class="nav-link" data-i18n="nav_about">// ABOUT</a>
+        <a href="#directives" class="nav-link" data-i18n="nav_directives"
+          >// DIRECTIVES</a
+        >
+        <a href="#skills" class="nav-link" data-i18n="nav_skills"
+          >// TECH STACK</a
+        >
+        <a href="#experience" class="nav-link" data-i18n="nav_experience"
+          >// EXPERIENCE</a
+        >
+        <a href="#contact" class="nav-link" data-i18n="nav_contact"
+          >// CONTACT</a
+        >
+        <button class="lang-toggle code-font magnetic-btn" id="lang-toggle">
+          EN
+        </button>
+      </div>
     </nav>
 
     <main id="smooth-wrapper">
-        <div id="smooth-content">
-            <!-- Hero Section -->
-            <section class="hero" id="hero">
-                <div class="crosshairs top-left"></div>
-                <div class="crosshairs top-right"></div>
-                <div class="crosshairs bottom-left"></div>
-                <div class="crosshairs bottom-right"></div>
+      <div id="smooth-content">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+          <div class="crosshairs top-left"></div>
+          <div class="crosshairs top-right"></div>
+          <div class="crosshairs bottom-left"></div>
+          <div class="crosshairs bottom-right"></div>
 
-                <div class="container hero-container parallax-element">
-                    <p class="eyebrow code-font"><span data-i18n="hero_eyebrow">CRAFTING DIGITAL EXPERIENCES</span>
-                        <span class="blink">_</span>
-                    </p>
-                    <h1 class="hero-title hero-text-anim">
-                        <div class="line-wrap"><span class="line">RAUL</span></div>
-                        <div class="line-wrap"><span class="line">FALLUH</span></div>
-                    </h1>
-                    <div class="hero-subtext line-wrap hero-text-anim">
-                        <span class="line code-font" data-i18n="hero_subtext">FULL STACK DEV // SOFTWARE
-                            ENGINEERING</span>
-                    </div>
-
-                    <div class="hero-image-wrapper wrapper-parallax">
-                        <div class="tech-overlay"></div>
-                        <div class="scanline"></div>
-                        <img src="img/perfil.png" alt="Raul Avatar" class="hero-image" />
-                        <div class="hero-image-coords code-font">LAT: -15.7938 // LNG: -47.8827</div>
-                    </div>
-                </div>
-
-                <!-- Abstract parallax shapes -->
-                <div class="data-stream data-1 parallax-fast"></div>
-                <div class="data-stream data-2 parallax-slow"></div>
-
-                <div class="scrolldown">
-                    <div class="scrolldown-line"></div>
-                </div>
-            </section>
-
-            <!-- Marquee tech skills -->
-            <div class="marquee-section">
-                <div class="marquee" id="marquee-1">
-                    <div class="marquee-inner code-font">
-                        <span>FULL STACK</span><span class="dot">·</span>
-                        <span>NODE.JS</span><span class="dot">·</span>
-                        <span>REACT</span><span class="dot">·</span>
-                        <span>POSTGRESQL</span><span class="dot">·</span>
-                        <span>NESTJS</span><span class="dot">·</span>
-                        <span>TYPESCRIPT</span><span class="dot">·</span>
-                        <span>FULL STACK</span><span class="dot">·</span>
-                        <span>NODE.JS</span><span class="dot">·</span>
-                        <span>REACT</span><span class="dot">·</span>
-                        <span>POSTGRESQL</span><span class="dot">·</span>
-                        <span>NESTJS</span><span class="dot">·</span>
-                        <span>TYPESCRIPT</span>
-                    </div>
-                </div>
+          <div class="container hero-container parallax-element">
+            <p class="eyebrow code-font">
+              <span data-i18n="hero_eyebrow">CRAFTING DIGITAL EXPERIENCES</span>
+              <span class="blink">_</span>
+            </p>
+            <h1 class="hero-title hero-text-anim">
+              <div class="line-wrap"><span class="line">RAUL</span></div>
+              <div class="line-wrap"><span class="line">FALLUH</span></div>
+            </h1>
+            <div class="hero-subtext line-wrap hero-text-anim">
+              <span class="line code-font" data-i18n="hero_subtext"
+                >FULL STACK DEV // SOFTWARE ENGINEERING</span
+              >
             </div>
 
-            <!-- About Section -->
-            <section class="about section-pad" id="about">
-                <div class="container grid-2">
-                    <div class="about-text-col">
-                        <h2 class="section-title">
-                            <span class="title-index code-font">01</span>
-                            <div class="line-wrap"><span class="line" data-i18n="sec_about">WHO AM I</span></div>
-                        </h2>
-                        <div class="p-wrap">
-                            <p class="text-block" data-i18n="about_p1">Sou estudante de Ciência da Computação e
-                                desenvolvedor Full Stack especializado em ecossistemas de alta performance (ReactJS,
-                                Node.js/NestJS, TypeScript e PostgreSQL). Tenho me aprofundado no desenvolvimento de
-                                sistemas logísticos críticos, mergulhando no processamento de documentos fiscais (CTe,
-                                NF-e, NFS-e), integração de APIs RESTful com Swagger e criação de dashboards analíticos.
-                            </p>
-                        </div>
-                        <div class="p-wrap">
-                            <p class="text-block" data-i18n="about_p2"><strong>Foco Atual: Engenharia de Software +
-                                    IA.</strong> Minha dedicação atual está na convergência entre o desenvolvimento
-                                tradicional e a inteligência artificial. Estou aprofundando conhecimentos em Agentes de
-                                IA e frameworks de automação inteligente.</p>
-                        </div>
+            <div class="hero-image-wrapper wrapper-parallax">
+              <div class="tech-overlay"></div>
+              <div class="scanline"></div>
+              <img src="img/perfil.png" alt="Raul Avatar" class="hero-image" />
+              <div class="hero-image-coords code-font">
+                LAT: -15.7938 // LNG: -47.8827
+              </div>
+            </div>
+          </div>
 
-                        <!-- Tech Status bars -->
-                        <div class="status-bars mt-4 code-font">
-                            <div class="status-row">
-                                <span>FRONTEND_LOAD</span>
-                                <div class="s-bar">
-                                    <div class="s-fill" style="width: 85%;"></div>
-                                </div>
-                            </div>
-                            <div class="status-row">
-                                <span>BACKEND_CORE</span>
-                                <div class="s-bar">
-                                    <div class="s-fill" style="width: 95%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <!-- Abstract parallax shapes -->
+          <div class="data-stream data-1 parallax-fast"></div>
+          <div class="data-stream data-2 parallax-slow"></div>
 
-                    <div class="about-img-col">
-                        <div class="img-reveal-wrapper magnetic-element">
-                            <div class="corner-borders"></div>
-                            <img src="img/sobre.png" alt="Sobre Raul" class="about-img scale-parallax" />
-                        </div>
-                    </div>
-                </div>
+          <div class="scrolldown">
+            <div class="scrolldown-line"></div>
+          </div>
+        </section>
 
-                <!-- Giant Scrubbing Text -->
-                <div class="scrub-container">
-                    <div class="scrub-text code-font">&lt;BUILD&gt; &lt;INNOVATE&gt; &lt;SCALE&gt; &lt;BUILD&gt;
-                        &lt;INNOVATE&gt; &lt;SCALE&gt;</div>
-                </div>
-            </section>
-
-            <!-- Directives (Sticky Scroll Section) -->
-            <section class="directives section-pad" id="directives">
-                <div class="container directives-container">
-                    <div class="dir-left">
-                        <h2 class="section-title title-no-border">
-                            <span class="title-index code-font">02</span>
-                            <div class="line-wrap"><span class="line" data-i18n="sec_directives">CORE DIRECTIVES</span>
-                            </div>
-                        </h2>
-                        <p class="dir-lead text-block mt-4" data-i18n="dir_lead">Os pilares que guiam minha arquitetura
-                            de código e decisões de engenharia no escopo do projeto.</p>
-                    </div>
-                    <div class="dir-right">
-                        <div class="dir-card">
-                            <div class="dir-num code-font">#01</div>
-                            <h3 class="dir-title" data-i18n="dir_t1">Escalabilidade</h3>
-                            <p class="dir-desc" data-i18n="dir_d1">Estruturação de sistemas visando alto volume.
-                                Arquitetura em camadas e cache eficiente (Redis) para aplicações que crescem.</p>
-                        </div>
-                        <div class="dir-card">
-                            <div class="dir-num code-font">#02</div>
-                            <h3 class="dir-title" data-i18n="dir_t2">Clean Code & SOLID</h3>
-                            <p class="dir-desc" data-i18n="dir_d2">Código testável, limpo e documentado. A adoção de
-                                boas práticas diminui a fricção na manutenção do longo prazo.</p>
-                        </div>
-                        <div class="dir-card">
-                            <div class="dir-num code-font">#03</div>
-                            <h3 class="dir-title" data-i18n="dir_t3">Integração com IA</h3>
-                            <p class="dir-desc" data-i18n="dir_d3">Utilização de LLMs modernos e agentes automatizados
-                                para impulsionar a experiência do usuário e otimizar rotinas.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Skills Section (Interactive List) -->
-            <section class="skills section-pad" id="skills">
-                <div class="container">
-                    <h2 class="section-title">
-                        <span class="title-index code-font">03</span>
-                        <div class="line-wrap"><span class="line" data-i18n="sec_skills">TECH STACK</span></div>
-                    </h2>
-
-                    <!-- A floating element that follows mouse inside this section -->
-                    <div class="hover-reveal-img code-font">
-                        <div class="hri-inner">SYSTEM_MATCH_FOUND</div>
-                    </div>
-
-                    <div class="skills-list-wrap">
-                        <div class="skill-row interactive-row" data-tech="frontend">
-                            <div class="sr-head" data-i18n="sg_frontend">Frontend</div>
-                            <div class="sr-body code-font">ReactJS, Vite, JavaScript (ES6+), CSS3, Axios, Zustand</div>
-                            <div class="sr-arrow">↗</div>
-                        </div>
-                        <div class="skill-row interactive-row" data-tech="backend">
-                            <div class="sr-head" data-i18n="sg_backend">Backend</div>
-                            <div class="sr-body code-font">Node.js, TypeScript, Fastify, NestJS, Prisma ORM, PostgreSQL,
-                                JWT</div>
-                            <div class="sr-arrow">↗</div>
-                        </div>
-                        <div class="skill-row interactive-row" data-tech="tools">
-                            <div class="sr-head" data-i18n="sg_tools">Tools</div>
-                            <div class="sr-body code-font">Git, GitHub, Docker, Redis, Linux, VS Code</div>
-                            <div class="sr-arrow">↗</div>
-                        </div>
-                        <div class="skill-row interactive-row" data-tech="others">
-                            <div class="sr-head" data-i18n="sg_others">Others</div>
-                            <div class="sr-body code-font">Clean Architecture, SOLID, Scrum/Agile, UI/UX</div>
-                            <div class="sr-arrow">↗</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Experience Horizontal Section -->
-            <section class="experience section-pad" id="experience">
-                <div class="container">
-                    <h2 class="section-title section-title-mb">
-                        <span class="title-index code-font">04</span>
-                        <div class="line-wrap"><span class="line" data-i18n="sec_experience">EXPERIENCE</span></div>
-                    </h2>
-                </div>
-
-                <div class="horizontal-scroll-wrapper">
-                    <div class="horizontal-scroll-content">
-                        <!-- Card 1 -->
-                        <div class="timeline-card card-reveal">
-                            <div class="tl-date code-font" data-i18n="tl_date1">SEP 2025 - PRESENT</div>
-                            <h3 class="tl-title" data-i18n="tl_title1">Estágio - Full Stack</h3>
-                            <div class="tl-company"><span class="bracket">[</span> MH Gestão Empresarial <span
-                                    class="bracket">]</span></div>
-                            <p class="tl-desc" data-i18n="tl_desc1">Desenvolvimento Full Stack de sistemas logísticos
-                                (TMS, WMS, ERP). Dashboards interativos, emissão de documentos fiscais, autenticação
-                                RBAC.</p>
-                            <div class="card-borders"></div>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="timeline-card card-reveal">
-                            <div class="tl-date code-font" data-i18n="tl_date2">2023 - PRESENT</div>
-                            <h3 class="tl-title" data-i18n="tl_title2">Ciência da Computação</h3>
-                            <div class="tl-company"><span class="bracket">[</span> CEUB <span class="bracket">]</span>
-                            </div>
-                            <p class="tl-desc" data-i18n="tl_desc2">Formação superior com foco em algoritmos,
-                                arquitetura de sistemas e metodologias ágeis (Atualmente 7º semestre).</p>
-                            <div class="card-borders"></div>
-                        </div>
-                        <!-- Card 3 -->
-                        <div class="timeline-card card-reveal">
-                            <div class="tl-date code-font" data-i18n="tl_date3">2021 - 2023</div>
-                            <h3 class="tl-title" data-i18n="tl_title3">Freelancer & Editor</h3>
-                            <div class="tl-company"><span class="bracket">[</span> Independent <span
-                                    class="bracket">]</span></div>
-                            <p class="tl-desc" data-i18n="tl_desc3">Edição de vídeos e programação web para projetos
-                                variados. Formação na base de HTML/CSS/JS e Python.</p>
-                            <div class="card-borders"></div>
-                        </div>
-                        <!-- Card 4 -->
-                        <div class="timeline-card card-reveal">
-                            <div class="tl-date code-font" data-i18n="tl_date4">FUTURE</div>
-                            <h3 class="tl-title" data-i18n="tl_title4">Next Challenge</h3>
-                            <div class="tl-company"><span class="bracket">[</span> Loading... <span
-                                    class="bracket">]</span></div>
-                            <p class="tl-desc" data-i18n="tl_desc4">Sempre buscando o próximo grande desafio para criar
-                                soluções escaláveis e modernas.</p>
-                            <div class="card-borders"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Portfolio Link -->
-            <section class="portfolio section-pad" id="portfolio">
-                <div class="clip-bg"></div>
-                <div class="container container-center relative">
-                    <h2 class="hidden-title" data-i18n="sec_portfolio">GITHUB</h2>
-                    <a href="https://github.com/1harz" target="_blank" class="huge-link magnetic-btn cursor-hover"
-                        data-cursor="ACCESS">
-                        <span class="hl-text code-font" data-i18n="github_link">VIEW_GITHUB</span>
-                        <div class="hl-arrow-wrap">
-                            <span class="hl-arrow code-font">↗</span>
-                        </div>
-                    </a>
-                </div>
-            </section>
-
-            <!-- Contact Section -->
-            <section class="contact section-pad" id="contact">
-                <div class="container grid-2">
-                    <div class="contact-form-side parallax-element">
-                        <h2 class="section-title">
-                            <span class="title-index code-font">05</span>
-                            <div class="line-wrap"><span class="line" data-i18n="sec_contact">CONTACT</span></div>
-                        </h2>
-
-                        <form id="contact-form" action="https://formsubmit.co/harzgeral@gmail.com" method="POST"
-                            class="dark-form">
-                            <input type="hidden" name="_next" value="#">
-                            <div class="input-wrap form-reveal">
-                                <label for="name" class="code-font" data-i18n="form_name">NAME</label>
-                                <input type="text" id="name" name="name" placeholder="John Doe" required
-                                    data-i18n-placeholder="form_name_ph">
-                                <div class="input-focus-line"></div>
-                            </div>
-                            <div class="input-wrap form-reveal">
-                                <label for="email" class="code-font" data-i18n="form_email">EMAIL</label>
-                                <input type="email" id="email" name="email" placeholder="john@domain.com" required
-                                    data-i18n-placeholder="form_email_ph">
-                                <div class="input-focus-line"></div>
-                            </div>
-                            <div class="input-wrap form-reveal">
-                                <label for="message" class="code-font" data-i18n="form_message">MESSAGE</label>
-                                <textarea id="message" name="message" required placeholder="Hello Raul..."
-                                    data-i18n-placeholder="form_message_ph"></textarea>
-                                <div class="input-focus-line"></div>
-                            </div>
-                            <div class="input-wrap form-reveal mt-4">
-                                <button class="btn-submit magnetic-btn cursor-hover" data-cursor="START" type="submit"
-                                    data-i18n="form_submit">SEND MESSAGE</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="contact-info-side">
-                        <div class="info-group info-reveal">
-                            <div class="ig-title code-font" data-i18n="info_whatsapp">WHATSAPP</div>
-                            <a href="https://wa.me/5561984078564" target="_blank" class="ig-link">+55 61 98407-8564
-                                <span class="code-font">↗</span></a>
-                        </div>
-                        <div class="info-group info-reveal">
-                            <div class="ig-title code-font" data-i18n="info_email">EMAIL</div>
-                            <a href="mailto:raulfalluh@gmail.com" class="ig-link">raulfalluh@gmail.com <span
-                                    class="code-font">↗</span></a>
-                        </div>
-                        <div class="info-group info-reveal">
-                            <div class="ig-title code-font" data-i18n="info_linkedin">LINKEDIN</div>
-                            <a href="https://www.linkedin.com/in/raulfalluh/" target="_blank"
-                                class="ig-link">/in/raulfalluh <span class="code-font">↗</span></a>
-                        </div>
-                        <div class="info-group info-reveal">
-                            <div class="ig-title code-font" data-i18n="info_location">LOCATION</div>
-                            <div class="ig-text code-font">Brasília, DF // Brasil</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="container footer-flex">
-                    <div class="footer-logo code-font">&lt;HRZ_DEV/&gt;</div>
-                    <div class="footer-copy code-font">
-                        <span class="blink">_</span>
-                        ©
-                        <script>document.write(new Date().getFullYear())</script> <span
-                            data-i18n="developed_by">DESENVOLVIDO POR</span> <a href="https://github.com/1harz"
-                            target="_blank" class="footer-link">1harz</a>
-                    </div>
-                </div>
-            </footer>
+        <!-- Marquee tech skills -->
+        <div class="marquee-section">
+          <div class="marquee" id="marquee-1">
+            <div class="marquee-inner code-font">
+              <span>FULL STACK</span><span class="dot">·</span>
+              <span>NODE.JS</span><span class="dot">·</span> <span>REACT</span
+              ><span class="dot">·</span> <span>POSTGRESQL</span
+              ><span class="dot">·</span> <span>NESTJS</span
+              ><span class="dot">·</span> <span>TYPESCRIPT</span
+              ><span class="dot">·</span> <span>FULL STACK</span
+              ><span class="dot">·</span> <span>NODE.JS</span
+              ><span class="dot">·</span> <span>REACT</span
+              ><span class="dot">·</span> <span>POSTGRESQL</span
+              ><span class="dot">·</span> <span>NESTJS</span
+              ><span class="dot">·</span>
+              <span>TYPESCRIPT</span>
+            </div>
+          </div>
         </div>
+
+        <!-- About Section -->
+        <section class="about section-pad" id="about">
+          <div class="container grid-2">
+            <div class="about-text-col">
+              <h2 class="section-title">
+                <span class="title-index code-font">01</span>
+                <div class="line-wrap">
+                  <span class="line" data-i18n="sec_about">WHO AM I</span>
+                </div>
+              </h2>
+              <div class="p-wrap">
+                <p class="text-block" data-i18n="about_p1">
+                  Sou estudante de Ciência da Computação e desenvolvedor Full
+                  Stack especializado em ecossistemas de alta performance
+                  (ReactJS, Node.js/NestJS, TypeScript e PostgreSQL). Tenho me
+                  aprofundado no desenvolvimento de sistemas logísticos
+                  críticos, mergulhando no processamento de documentos fiscais
+                  (CTe, NF-e, NFS-e), integração de APIs RESTful com Swagger e
+                  criação de dashboards analíticos.
+                </p>
+              </div>
+              <div class="p-wrap">
+                <p class="text-block" data-i18n="about_p2">
+                  <strong>Foco Atual: Engenharia de Software + IA.</strong>
+                  Minha dedicação atual está na convergência entre o
+                  desenvolvimento tradicional e a inteligência artificial. Estou
+                  aprofundando conhecimentos em Agentes de IA e frameworks de
+                  automação inteligente.
+                </p>
+              </div>
+
+              <!-- Tech Status bars -->
+              <div class="status-bars mt-4 code-font">
+                <div class="status-row">
+                  <span>FRONTEND_LOAD</span>
+                  <div class="s-bar">
+                    <div class="s-fill" style="width: 85%"></div>
+                  </div>
+                </div>
+                <div class="status-row">
+                  <span>BACKEND_CORE</span>
+                  <div class="s-bar">
+                    <div class="s-fill" style="width: 95%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-img-col">
+              <div class="img-reveal-wrapper magnetic-element">
+                <div class="corner-borders"></div>
+                <img
+                  src="img/sobre.png"
+                  alt="Sobre Raul"
+                  class="about-img scale-parallax"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Giant Scrubbing Text -->
+          <div class="scrub-container">
+            <div class="scrub-text code-font">
+              &lt;BUILD&gt; &lt;INNOVATE&gt; &lt;SCALE&gt; &lt;BUILD&gt;
+              &lt;INNOVATE&gt; &lt;SCALE&gt;
+            </div>
+          </div>
+        </section>
+
+        <!-- Directives (Sticky Scroll Section) -->
+        <section class="directives section-pad" id="directives">
+          <div class="container directives-container">
+            <div class="dir-left">
+              <h2 class="section-title title-no-border">
+                <span class="title-index code-font">02</span>
+                <div class="line-wrap">
+                  <span class="line" data-i18n="sec_directives"
+                    >CORE DIRECTIVES</span
+                  >
+                </div>
+              </h2>
+              <p class="dir-lead text-block mt-4" data-i18n="dir_lead">
+                Os pilares que guiam minha arquitetura de código e decisões de
+                engenharia no escopo do projeto.
+              </p>
+            </div>
+            <div class="dir-right">
+              <div class="dir-card">
+                <div class="dir-num code-font">#01</div>
+                <h3 class="dir-title" data-i18n="dir_t1">Escalabilidade</h3>
+                <p class="dir-desc" data-i18n="dir_d1">
+                  Estruturação de sistemas visando alto volume. Arquitetura em
+                  camadas e cache eficiente (Redis) para aplicações que crescem.
+                </p>
+              </div>
+              <div class="dir-card">
+                <div class="dir-num code-font">#02</div>
+                <h3 class="dir-title" data-i18n="dir_t2">Clean Code & SOLID</h3>
+                <p class="dir-desc" data-i18n="dir_d2">
+                  Código testável, limpo e documentado. A adoção de boas
+                  práticas diminui a fricção na manutenção do longo prazo.
+                </p>
+              </div>
+              <div class="dir-card">
+                <div class="dir-num code-font">#03</div>
+                <h3 class="dir-title" data-i18n="dir_t3">Integração com IA</h3>
+                <p class="dir-desc" data-i18n="dir_d3">
+                  Utilização de LLMs modernos e agentes automatizados para
+                  impulsionar a experiência do usuário e otimizar rotinas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills Section (Interactive List) -->
+        <section class="skills section-pad" id="skills">
+          <div class="container">
+            <h2 class="section-title">
+              <span class="title-index code-font">03</span>
+              <div class="line-wrap">
+                <span class="line" data-i18n="sec_skills">TECH STACK</span>
+              </div>
+            </h2>
+
+            <!-- A floating element that follows mouse inside this section -->
+            <div class="hover-reveal-img code-font">
+              <div class="hri-inner">SYSTEM_MATCH_FOUND</div>
+            </div>
+
+            <div class="skills-list-wrap">
+              <div class="skill-row interactive-row" data-tech="frontend">
+                <div class="sr-head" data-i18n="sg_frontend">Frontend</div>
+                <div class="sr-body code-font">
+                  ReactJS, Vite, JavaScript (ES6+), CSS3, Axios, Zustand
+                </div>
+                <div class="sr-arrow">↗</div>
+              </div>
+              <div class="skill-row interactive-row" data-tech="backend">
+                <div class="sr-head" data-i18n="sg_backend">Backend</div>
+                <div class="sr-body code-font">
+                  Node.js, TypeScript, Fastify, NestJS, Prisma ORM, PostgreSQL,
+                  JWT
+                </div>
+                <div class="sr-arrow">↗</div>
+              </div>
+              <div class="skill-row interactive-row" data-tech="tools">
+                <div class="sr-head" data-i18n="sg_tools">Tools</div>
+                <div class="sr-body code-font">
+                  Git, GitHub, Docker, Redis, Linux, VS Code
+                </div>
+                <div class="sr-arrow">↗</div>
+              </div>
+              <div class="skill-row interactive-row" data-tech="mobile">
+                <div class="sr-head" data-i18n="sg_mobile">Mobile</div>
+                <div class="sr-body code-font">
+                  Android Studio, Capacitor, Expo (Hybrid Apps)
+                </div>
+                <div class="sr-arrow">↗</div>
+              </div>
+              <div class="skill-row interactive-row" data-tech="others">
+                <div class="sr-head" data-i18n="sg_others">Others</div>
+                <div class="sr-body code-font">
+                  Clean Architecture, SOLID, Scrum/Agile, UI/UX
+                </div>
+                <div class="sr-arrow">↗</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience Horizontal Section -->
+        <section class="experience section-pad" id="experience">
+          <div class="container">
+            <h2 class="section-title section-title-mb">
+              <span class="title-index code-font">04</span>
+              <div class="line-wrap">
+                <span class="line" data-i18n="sec_experience">EXPERIENCE</span>
+              </div>
+            </h2>
+          </div>
+
+          <div class="horizontal-scroll-wrapper">
+            <div class="horizontal-scroll-content">
+              <!-- Card 1 -->
+              <div class="timeline-card card-reveal">
+                <div class="tl-date code-font" data-i18n="tl_date1">
+                  SEP 2025 - PRESENT
+                </div>
+                <h3 class="tl-title" data-i18n="tl_title1">
+                  Estágio - Full Stack
+                </h3>
+                <div class="tl-company">
+                  <span class="bracket">[</span> MH Gestão Empresarial
+                  <span class="bracket">]</span>
+                </div>
+                <p class="tl-desc" data-i18n="tl_desc1">
+                  Desenvolvimento Full Stack de sistemas logísticos (TMS, WMS,
+                  ERP). Dashboards interativos, emissão de documentos fiscais,
+                  autenticação RBAC.
+                </p>
+                <div class="card-borders"></div>
+              </div>
+              <!-- Card 2 -->
+              <div class="timeline-card card-reveal">
+                <div class="tl-date code-font" data-i18n="tl_date2">
+                  2023 - PRESENT
+                </div>
+                <h3 class="tl-title" data-i18n="tl_title2">
+                  Ciência da Computação
+                </h3>
+                <div class="tl-company">
+                  <span class="bracket">[</span> CEUB
+                  <span class="bracket">]</span>
+                </div>
+                <p class="tl-desc" data-i18n="tl_desc2">
+                  Formação superior com foco em algoritmos, arquitetura de
+                  sistemas e metodologias ágeis (Atualmente 7º semestre).
+                </p>
+                <div class="card-borders"></div>
+              </div>
+              <!-- Card 3 -->
+              <div class="timeline-card card-reveal">
+                <div class="tl-date code-font" data-i18n="tl_date3">
+                  2021 - 2023
+                </div>
+                <h3 class="tl-title" data-i18n="tl_title3">
+                  Freelancer & Editor
+                </h3>
+                <div class="tl-company">
+                  <span class="bracket">[</span> Independent
+                  <span class="bracket">]</span>
+                </div>
+                <p class="tl-desc" data-i18n="tl_desc3">
+                  Edição de vídeos e programação web para projetos variados.
+                  Formação na base de HTML/CSS/JS e Python.
+                </p>
+                <div class="card-borders"></div>
+              </div>
+              <!-- Card 4 -->
+              <div class="timeline-card card-reveal">
+                <div class="tl-date code-font" data-i18n="tl_date4">FUTURE</div>
+                <h3 class="tl-title" data-i18n="tl_title4">Next Challenge</h3>
+                <div class="tl-company">
+                  <span class="bracket">[</span> Loading...
+                  <span class="bracket">]</span>
+                </div>
+                <p class="tl-desc" data-i18n="tl_desc4">
+                  Sempre buscando o próximo grande desafio para criar soluções
+                  escaláveis e modernas.
+                </p>
+                <div class="card-borders"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Portfolio Link -->
+        <section class="portfolio section-pad" id="portfolio">
+          <div class="clip-bg"></div>
+          <div class="container container-center relative">
+            <h2 class="hidden-title" data-i18n="sec_portfolio">GITHUB</h2>
+            <a
+              href="https://github.com/1harz"
+              target="_blank"
+              class="huge-link magnetic-btn cursor-hover"
+              data-cursor="ACCESS"
+            >
+              <span class="hl-text code-font" data-i18n="github_link"
+                >VIEW_GITHUB</span
+              >
+              <div class="hl-arrow-wrap">
+                <span class="hl-arrow code-font">↗</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact section-pad" id="contact">
+          <div class="container grid-2">
+            <div class="contact-form-side parallax-element">
+              <h2 class="section-title">
+                <span class="title-index code-font">05</span>
+                <div class="line-wrap">
+                  <span class="line" data-i18n="sec_contact">CONTACT</span>
+                </div>
+              </h2>
+
+              <form
+                id="contact-form"
+                action="https://formsubmit.co/harzgeral@gmail.com"
+                method="POST"
+                class="dark-form"
+              >
+                <input type="hidden" name="_next" value="#" />
+                <div class="input-wrap form-reveal">
+                  <label for="name" class="code-font" data-i18n="form_name"
+                    >NAME</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="John Doe"
+                    required
+                    data-i18n-placeholder="form_name_ph"
+                  />
+                  <div class="input-focus-line"></div>
+                </div>
+                <div class="input-wrap form-reveal">
+                  <label for="email" class="code-font" data-i18n="form_email"
+                    >EMAIL</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="john@domain.com"
+                    required
+                    data-i18n-placeholder="form_email_ph"
+                  />
+                  <div class="input-focus-line"></div>
+                </div>
+                <div class="input-wrap form-reveal">
+                  <label
+                    for="message"
+                    class="code-font"
+                    data-i18n="form_message"
+                    >MESSAGE</label
+                  >
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    placeholder="Hello Raul..."
+                    data-i18n-placeholder="form_message_ph"
+                  ></textarea>
+                  <div class="input-focus-line"></div>
+                </div>
+                <div class="input-wrap form-reveal mt-4">
+                  <button
+                    class="btn-submit magnetic-btn cursor-hover"
+                    data-cursor="START"
+                    type="submit"
+                    data-i18n="form_submit"
+                  >
+                    SEND MESSAGE
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="contact-info-side">
+              <div class="info-group info-reveal">
+                <div class="ig-title code-font" data-i18n="info_whatsapp">
+                  WHATSAPP
+                </div>
+                <a
+                  href="https://wa.me/5561984078564"
+                  target="_blank"
+                  class="ig-link"
+                  >+55 61 98407-8564 <span class="code-font">↗</span></a
+                >
+              </div>
+              <div class="info-group info-reveal">
+                <div class="ig-title code-font" data-i18n="info_email">
+                  EMAIL
+                </div>
+                <a href="mailto:raulfalluh@gmail.com" class="ig-link"
+                  >raulfalluh@gmail.com <span class="code-font">↗</span></a
+                >
+              </div>
+              <div class="info-group info-reveal">
+                <div class="ig-title code-font" data-i18n="info_linkedin">
+                  LINKEDIN
+                </div>
+                <a
+                  href="https://www.linkedin.com/in/raulfalluh/"
+                  target="_blank"
+                  class="ig-link"
+                  >/in/raulfalluh <span class="code-font">↗</span></a
+                >
+              </div>
+              <div class="info-group info-reveal">
+                <div class="ig-title code-font" data-i18n="info_location">
+                  LOCATION
+                </div>
+                <div class="ig-text code-font">Brasília, DF // Brasil</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="container footer-flex">
+            <div class="footer-logo code-font">&lt;HRZ_DEV/&gt;</div>
+            <div class="footer-copy code-font">
+              <span class="blink">_</span>
+              ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              <span data-i18n="developed_by">DESENVOLVIDO POR</span>
+              <a
+                href="https://github.com/1harz"
+                target="_blank"
+                class="footer-link"
+                >1harz</a
+              >
+            </div>
+          </div>
+        </footer>
+      </div>
     </main>
 
     <script src="js/script.js"></script>
-</body>
-
+  </body>
 </html>
