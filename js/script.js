@@ -27,18 +27,30 @@ const i18n = {
         sg_tools: "Ferramentas",
         sg_others: "Outros",
         sec_experience: "EXPERIÊNCIA",
-        tl_date1: "SET 2025 - PRESENTE",
-        tl_title1: "Estágio - Full Stack",
-        tl_desc1: "Desenvolvimento Full Stack de sistemas logísticos (TMS, WMS, ERP). Dashboards interativos, emissão de documentos fiscais, autenticação RBAC.",
-        tl_date2: "2023 - PRESENTE",
-        tl_title2: "Ciência da Computação",
-        tl_desc2: "Formação superior com foco em algoritmos, arquitetura de sistemas e metodologias ágeis (Atualmente 7º semestre).",
-        tl_date3: "2021 - 2023",
-        tl_title3: "Freelancer & Editor",
-        tl_desc3: "Edição de vídeos e programação web para projetos variados. Formação na base de HTML/CSS/JS e Python.",
-        tl_date4: "FUTURO",
-        tl_title4: "Próximo Desafio",
-        tl_desc4: "Sempre buscando o próximo grande desafio para criar soluções escaláveis e modernas.",
+        tl_date1: "MAI 2026 - PRESENTE",
+        tl_title1: "Desenvolvedor Full Stack Jr",
+        tl_desc1: "Arquitetura e manutenção de ecossistemas web escaláveis e sistemas críticos.",
+        tl_desc1_details: "Atuo na arquitetura, construção e manutenção de ecossistemas web escaláveis e sistemas críticos de gestão (ERP, TMS, WMS). Frontend com React, TypeScript, Vue.js, Tailwind, Vite, Zustand, Three.js e GSAP; backend com Node.js, NestJS e Fastify, PostgreSQL e Prisma, além de segurança (JWT, Passport, Bcrypt). DevOps com Docker, Redis, Grafana e Prometheus e deploys em Vercel, Render e Neon. Liderança técnica ponta a ponta, mobile (React Native), automações em Python e integração com IA.",
+        tl_date2: "MAI 2026 - PRESENTE",
+        tl_title2: "Desenvolvedor & CEO",
+        tl_desc2: "Desenvolvimento e gestão do Nur Racing, servidor de corridas no FiveM.",
+        tl_desc2_details: "Desenvolvedor e CEO do Nur Racing, um servidor de corridas no FiveM. Tecnologias utilizadas incluem Lua, Luau, Python, Shell, Vue.js e MariaDB.<br><br>Site: <a href='https://1harz.github.io/NUR/' target='_blank' class='code-font' style='color: var(--accent); text-decoration: none;'>nurracing.com.br</a>",
+        tl_date3: "SET 2025 - MAI 2026",
+        tl_title3: "Estágio - Full Stack",
+        tl_desc3: "Desenvolvimento Full Stack de sistemas logísticos e dashboards interativos.",
+        tl_desc3_details: "Desenvolvimento Full Stack de sistemas logísticos (TMS, WMS, ERP). Dashboards interativos, emissão de documentos fiscais, autenticação RBAC.",
+        tl_date4: "2023 - PRESENTE",
+        tl_title4: "Ciência da Computação",
+        tl_desc4: "Formação superior com foco em algoritmos e arquitetura de sistemas.",
+        tl_desc4_details: "Formação superior com foco em algoritmos, arquitetura de sistemas e metodologias ágeis (Atualmente 8º semestre).",
+        tl_date5: "2021 - 2023",
+        tl_title5: "Freelancer & Editor",
+        tl_desc5: "Edição de vídeos e programação web para projetos variados.",
+        tl_desc5_details: "Edição de vídeos e programação web para projetos variados. Formação na base de HTML/CSS/JS e Python.",
+        tl_date6: "FUTURO",
+        tl_title6: "Próximo Desafio",
+        tl_desc6: "Buscando o próximo grande desafio para criar soluções escaláveis.",
+        tl_desc6_details: "Sempre buscando o próximo grande desafio para criar soluções escaláveis e modernas.",
         sec_portfolio: "GITHUB",
         github_link: "VER GITHUB",
         sec_contact: "CONTATO",
@@ -54,6 +66,8 @@ const i18n = {
         info_linkedin: "LINKEDIN",
         info_location: "LOCALIZAÇÃO",
         developed_by: "DESENVOLVIDO POR",
+        btn_details: "DETALHES",
+        modal_close: "[X] FECHAR",
     },
     en: {
         loader: "SYSTEM_INITIATION",
@@ -82,18 +96,30 @@ const i18n = {
         sg_tools: "Tools",
         sg_others: "Others",
         sec_experience: "EXPERIENCE",
-        tl_date1: "SEP 2025 - PRESENT",
-        tl_title1: "Internship - Full Stack",
-        tl_desc1: "Full Stack development of logistics systems (TMS, WMS, ERP). Interactive dashboards, fiscal document emission, RBAC authentication.",
-        tl_date2: "2023 - PRESENT",
-        tl_title2: "Computer Science",
-        tl_desc2: "Bachelor's degree focusing on algorithms, systems architecture, and agile methodologies (Currently in 7th semester).",
-        tl_date3: "2021 - 2023",
-        tl_title3: "Freelancer & Editor",
-        tl_desc3: "Video editing and web programming for various projects. Basic training in HTML/CSS/JS and Python.",
-        tl_date4: "FUTURE",
-        tl_title4: "Next Challenge",
-        tl_desc4: "Always looking for the next big challenge to build scalable and modern solutions.",
+        tl_date1: "MAY 2026 - PRESENT",
+        tl_title1: "Junior Full Stack Developer",
+        tl_desc1: "Architecting and maintaining scalable web ecosystems and critical systems.",
+        tl_desc1_details: "Architecting, building and maintaining scalable web ecosystems and critical management systems (ERP, TMS, WMS). Frontend with React, TypeScript, Vue.js, Tailwind, Vite, Zustand, Three.js and GSAP; backend with Node.js, NestJS and Fastify, PostgreSQL and Prisma, plus security (JWT, Passport, Bcrypt). DevOps with Docker, Redis, Grafana and Prometheus and deploys on Vercel, Render and Neon. End-to-end technical leadership, mobile (React Native), Python automation and AI integration.",
+        tl_date2: "MAY 2026 - PRESENT",
+        tl_title2: "Developer & CEO",
+        tl_desc2: "Development and management of Nur Racing, a FiveM racing server.",
+        tl_desc2_details: "Developer and CEO of Nur Racing, a racing server in FiveM. Technologies used include Lua, Luau, Python, Shell, Vue.js, and MariaDB.<br><br>Website: <a href='https://1harz.github.io/NUR/' target='_blank' class='code-font' style='color: var(--accent); text-decoration: none;'>nurracing.com.br</a>",
+        tl_date3: "SEP 2025 - MAY 2026",
+        tl_title3: "Internship - Full Stack",
+        tl_desc3: "Full Stack development of logistics systems and interactive dashboards.",
+        tl_desc3_details: "Full Stack development of logistics systems (TMS, WMS, ERP). Interactive dashboards, fiscal document emission, RBAC authentication.",
+        tl_date4: "2023 - PRESENT",
+        tl_title4: "Computer Science",
+        tl_desc4: "Bachelor's degree focusing on algorithms and systems architecture.",
+        tl_desc4_details: "Bachelor's degree focusing on algorithms, systems architecture, and agile methodologies (Currently in 8th semester).",
+        tl_date5: "2021 - 2023",
+        tl_title5: "Freelancer & Editor",
+        tl_desc5: "Video editing and web programming for various projects.",
+        tl_desc5_details: "Video editing and web programming for various projects. Basic training in HTML/CSS/JS and Python.",
+        tl_date6: "FUTURE",
+        tl_title6: "Next Challenge",
+        tl_desc6: "Looking for the next big challenge to build scalable solutions.",
+        tl_desc6_details: "Always looking for the next big challenge to build scalable and modern solutions.",
         sec_portfolio: "GITHUB",
         github_link: "VIEW GITHUB",
         sec_contact: "CONTACT",
@@ -109,6 +135,8 @@ const i18n = {
         info_linkedin: "LINKEDIN",
         info_location: "LOCATION",
         developed_by: "DEVELOPED BY",
+        btn_details: "DETAILS",
+        modal_close: "[X] CLOSE",
     }
 };
 
@@ -501,3 +529,39 @@ magneticEls.forEach(el => {
         if (inner) gsap.to(inner, { duration: 0.3, x: 0, y: 0, ease: 'elastic.out(1, 0.3)' });
     });
 });
+
+// 6. Modal Logic
+const modal = document.getElementById('details-modal');
+const modalClose = document.getElementById('close-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+
+document.querySelectorAll('.btn-details').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const titleKey = btn.getAttribute('data-title-key');
+        const descKey = btn.getAttribute('data-desc-key');
+        
+        modalTitle.innerText = i18n[currentLang][titleKey];
+        modalTitle.setAttribute('data-text', i18n[currentLang][titleKey]);
+        modalDesc.innerHTML = i18n[currentLang][descKey];
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+if (modalClose) {
+    modalClose.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
+
+if (modal) {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
