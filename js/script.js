@@ -34,7 +34,7 @@ const i18n = {
         tl_date2: "MAI 2026 - PRESENTE",
         tl_title2: "Desenvolvedor & CEO",
         tl_desc2: "Desenvolvimento e gestão do Nur Racing, servidor de corridas no FiveM.",
-        tl_desc2_details: "Desenvolvedor e CEO do Nur Racing, um servidor de corridas no FiveM. Tecnologias utilizadas incluem Lua, Luau, Python, Shell, Vue.js e MariaDB.<br><br>Site: <a href='https://1harz.github.io/NUR/' target='_blank' class='code-font' style='color: var(--accent); text-decoration: none;'>nurracing.com.br</a>",
+        tl_desc2_details: "Desenvolvedor e CEO do Nur Racing, um servidor de corridas no FiveM. Tecnologias utilizadas incluem Lua, Luau, Python, Shell, Vue.js e MariaDB.<br><br>Site: <a href='https://1harz.com/nur' target='_blank' class='code-font' style='color: var(--accent); text-decoration: none;'>1harz.com/nur</a>",
         tl_date3: "SET 2025 - MAI 2026",
         tl_title3: "Estágio - Full Stack",
         tl_desc3: "Desenvolvimento Full Stack de sistemas logísticos e dashboards interativos.",
