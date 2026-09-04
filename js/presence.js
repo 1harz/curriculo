@@ -160,13 +160,7 @@
       this.broadcast('update', this.currentUser);
 
       // If socket is connected, emit update-user
-      if (this.socket && this.socket.connected) {
-        this.socket.emit('update-user', {
-          username: this.currentUser.name,
-          avatar: this.currentUser.avatar,
-          color: this.currentUser.color,
-        });
-      }
+      this._emitUpdateUser();
 
       this.render();
     }
@@ -210,6 +204,8 @@
             } catch (e) {}
 
             this.broadcast('update', this.currentUser);
+            // Sync updated location to the server
+            this._emitUpdateUser();
             this.render();
           }
         }
@@ -302,61 +298,122 @@
 
     setupWebSocketIfConfigured() {
       const wsUrl = window.PORTFOLIO_WS_URL || window.PRESENCE_WS_URL;
-      if (wsUrl && typeof window.io !== 'undefined') {
-        try {
-          this.socket = window.io(wsUrl, {
-            auth: { sessionId: this.currentUser.id },
-            reconnection: true,
-          });
+      if (!wsUrl || typeof window.io === 'undefined') return;
 
-          this.socket.on('connect', () => {
-            this.updateConnectionStatus('connected');
-            this.socket.emit('update-user', {
-              username: this.currentUser.name,
-              avatar: this.currentUser.avatar,
-              color: this.currentUser.color,
-              location: this.currentUser.location,
-              flag: this.currentUser.flag,
+      try {
+        this.socket = window.io(wsUrl, {
+          auth: { sessionId: this.currentUser.id },
+          reconnection: true,
+          reconnectionAttempts: Infinity,
+          reconnectionDelayMax: 5000,
+          transports: ['websocket', 'polling'],
+        });
+
+        this.socket.on('connect', () => {
+          console.log('[presence] Socket connected:', this.socket.id);
+          this.updateConnectionStatus('connected');
+          // Sync our profile to the server
+          this._emitUpdateUser();
+        });
+
+        this.socket.on('disconnect', () => {
+          this.updateConnectionStatus('disconnected');
+        });
+
+        // Server tells us our persistent session id
+        this.socket.on('session', ({ sessionId }) => {
+          if (sessionId) {
+            sessionStorage.setItem('curriculo_presence_session_id', sessionId);
+          }
+        });
+
+        // Full user list from server — includes all connected visitors
+        this.socket.on('users-updated', (remoteUsers) => {
+          if (!Array.isArray(remoteUsers)) return;
+
+          // Build a Set of active socket IDs from the server
+          const activeSocketIds = new Set();
+
+          remoteUsers.forEach((u) => {
+            // u.socketId is the server-side socket id, u.id is the session id
+            const key = u.socketId || u.id;
+            activeSocketIds.add(key);
+
+            // Skip ourselves (match by session id stored in currentUser.id)
+            if (u.id === this.currentUser.id || u.socketId === this.socket.id) return;
+
+            this.users.set(key, {
+              id: key,
+              socketId: u.socketId,
+              sessionId: u.id,
+              name: u.name || 'Visitor',
+              avatar: u.avatar || '1',
+              color: u.color || '#60a5fa',
+              location: u.location || 'Online',
+              flag: u.flag || '\uD83C\uDF10',
+              countryCode: u.countryCode || '',
+              lastSeen: Date.now(),
+              isMe: false,
             });
           });
 
-          this.socket.on('disconnect', () => {
-            this.updateConnectionStatus('disconnected');
-          });
-
-          this.socket.on('users-updated', (remoteUsers) => {
-            if (Array.isArray(remoteUsers)) {
-              remoteUsers.forEach((u) => {
-                if (u.id !== this.currentUser.id) {
-                  this.users.set(u.id, {
-                    ...u,
-                    lastSeen: Date.now(),
-                    isMe: false,
-                  });
-                }
-              });
-              this.render();
+          // Remove users no longer on the server
+          for (const [id, user] of this.users.entries()) {
+            if (!user.isMe && !activeSocketIds.has(id)) {
+              this.users.delete(id);
+              this.removeRemoteCursor(id);
             }
-          });
+          }
 
-          this.socket.on('cursor-changed', (data) => {
-            if (data && data.socketId && data.pos && data.socketId !== this.currentUser.id) {
-              const remoteUser = this.users.get(data.socketId) || {
-                id: data.socketId,
-                name: 'Visitor',
-                avatar: '1',
-                color: '#00e5ff',
-                location: 'Online',
-                flag: '🌐',
-                countryCode: '',
-              };
-              this.updateRemoteCursor(data.socketId, remoteUser, data.pos.x, data.pos.y);
-            }
-          });
-        } catch (e) {
-          console.warn('Failed to connect to WebSocket server:', e);
-        }
+          this.render();
+        });
+
+        // Live cursor from another user
+        this.socket.on('cursor-changed', (data) => {
+          if (!data || !data.pos || !data.socketId) return;
+          if (data.socketId === this.socket.id) return; // skip our own echo
+
+          // Find the user by their socket id
+          let remoteUser = this.users.get(data.socketId);
+          if (!remoteUser) {
+            remoteUser = {
+              id: data.socketId,
+              name: 'Visitor',
+              avatar: '1',
+              color: '#00e5ff',
+              location: 'Online',
+              flag: '\uD83C\uDF10',
+              countryCode: '',
+            };
+          }
+          this.updateRemoteCursor(data.socketId, remoteUser, data.pos.x, data.pos.y);
+        });
+
+        // Reconnect on wake/focus
+        const ensureConnected = () => {
+          if (this.socket && !this.socket.connected) this.socket.connect();
+        };
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') ensureConnected();
+        });
+        window.addEventListener('online', ensureConnected);
+
+      } catch (e) {
+        console.warn('[presence] Failed to connect to WebSocket server:', e);
       }
+    }
+
+    // Helper: emit our current profile to the server
+    _emitUpdateUser() {
+      if (!this.socket || !this.socket.connected) return;
+      this.socket.emit('update-user', {
+        username: this.currentUser.name,
+        avatar: this.currentUser.avatar,
+        color: this.currentUser.color,
+        location: this.currentUser.location,
+        flag: this.currentUser.flag,
+        countryCode: this.currentUser.countryCode || '',
+      });
     }
 
     setupDOM() {
@@ -624,7 +681,6 @@
             if (this.socket && this.socket.connected) {
               this.socket.emit('cursor-change', {
                 pos: { x, y },
-                socketId: this.currentUser.id,
               });
             }
           }
