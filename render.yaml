@@ -3,7 +3,6 @@ services:
     name: curriculo-ws
     runtime: node
     plan: free
-    rootDir: server
-    buildCommand: npm install
-    startCommand: node server.js
+    buildCommand: cd server && npm install
+    startCommand: node server/server.js
     healthCheckPath: /health
