@@ -1,0 +1,852 @@
+/* ==========================================================================
+   PRESENCE & ONLINE USERS WIDGET (Inspired by 3d-portfolio-main)
+   Aesthetic: Cyberpunk / Terminal / Neon Glassmorphism
+   ========================================================================== */
+
+/* 1. NAV PRESENCE BUTTON */
+.nav-presence-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 10, 10, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  user-select: none;
+}
+
+.nav-presence-btn:hover {
+  background: rgba(0, 229, 255, 0.12);
+  border-color: var(--accent, #00e5ff);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.nav-presence-btn:active {
+  transform: translateY(0);
+}
+
+/* Radar Beacon / Pulse Dot */
+.presence-radar-wrap {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.presence-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #00ff66;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00ff66;
+  position: relative;
+  z-index: 2;
+}
+
+.presence-radar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(0, 255, 102, 0.4);
+  animation: presence-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes presence-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  75%, 100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+.presence-count-pill {
+  background: rgba(0, 229, 255, 0.15);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--accent, #00e5ff);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--font-code, "JetBrains Mono", monospace);
+}
+
+.presence-label-text {
+  font-family: var(--font-code, "JetBrains Mono", monospace);
+  color: #cfcfcf;
+}
+
+/* 2. PRESENCE DRAWER / MODAL OVERLAY */
+.presence-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 3, 3, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.presence-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Slide-out Terminal Panel */
+.presence-panel {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(8, 10, 14, 0.94);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 229, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transform: translateX(30px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: calc(100vh - 40px);
+}
+
+.presence-modal-overlay.active .presence-panel {
+  transform: translateX(0);
+}
+
+/* Corner Bracket Accents (Cyberpunk Style) */
+.presence-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid var(--accent, #00e5ff);
+  border-left: 2px solid var(--accent, #00e5ff);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.presence-panel::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid var(--accent, #00e5ff);
+  border-right: 2px solid var(--accent, #00e5ff);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Panel Header */
+.presence-header {
+  padding: 16px 20px;
+  background: rgba(0, 229, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.presence-header-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.presence-header-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--accent, #00e5ff);
+  opacity: 0.8;
+}
+
+.presence-header-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.presence-close-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #888;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-family: var(--font-code, monospace);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.presence-close-btn:hover {
+  border-color: #ff3366;
+  color: #ff3366;
+  background: rgba(255, 51, 102, 0.1);
+}
+
+/* Status Bar */
+.presence-status-strip {
+  padding: 8px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #777;
+}
+
+.presence-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #00ff66;
+}
+
+.presence-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #00ff66;
+  box-shadow: 0 0 6px #00ff66;
+}
+
+/* Panel Body - Scrollable */
+.presence-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Section Labels */
+.presence-section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #666;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.presence-section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Current User (YOU) Card */
+.presence-current-user-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 6px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.presence-current-user-card:hover {
+  background: rgba(0, 229, 255, 0.04);
+  border-color: rgba(0, 229, 255, 0.4);
+}
+
+.presence-user-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.presence-avatar-wrap {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 2px;
+  background: rgba(0, 229, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.presence-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #111;
+}
+
+.presence-avatar-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #00ff66;
+  border: 2px solid #080a0e;
+  box-shadow: 0 0 5px #00ff66;
+}
+
+.presence-user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.presence-user-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.presence-user-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.presence-badge-you {
+  background: #5865f2;
+  color: #ffffff;
+  font-size: 0.6rem;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 700;
+  font-family: var(--font-code, monospace);
+  letter-spacing: 0.04em;
+}
+
+.presence-user-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: #999;
+  font-family: var(--font-code, monospace);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.presence-flag {
+  font-size: 0.85rem;
+}
+
+.presence-flag-img {
+  width: 18px;
+  height: 13px;
+  border-radius: 2px;
+  object-fit: cover;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.presence-edit-profile-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ccc;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+  font-family: var(--font-code, monospace);
+  flex-shrink: 0;
+}
+
+.presence-edit-profile-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: var(--accent, #00e5ff);
+  color: #fff;
+}
+
+/* 3. VISITORS LIST */
+.presence-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.presence-user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.presence-user-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(2px);
+}
+
+.presence-user-item .presence-avatar-wrap {
+  width: 38px;
+  height: 38px;
+}
+
+.presence-user-item .presence-user-name {
+  font-size: 0.82rem;
+}
+
+.presence-online-since {
+  font-size: 0.65rem;
+  color: #555;
+  font-family: var(--font-code, monospace);
+  flex-shrink: 0;
+}
+
+/* Empty State */
+.presence-empty-state {
+  text-align: center;
+  padding: 24px 10px;
+  color: #666;
+  font-size: 0.75rem;
+  font-family: var(--font-code, monospace);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+/* 4. EDIT PROFILE SUB-MODAL */
+.presence-edit-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.presence-edit-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.presence-edit-card {
+  width: 100%;
+  max-width: 380px;
+  background: #0d1017;
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 8px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 229, 255, 0.15);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.presence-edit-modal.active .presence-edit-card {
+  transform: scale(1);
+}
+
+.presence-edit-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+}
+
+.presence-edit-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+/* Avatar Preview & Randomizer */
+.presence-edit-avatar-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.presence-edit-avatar-preview {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  padding: 3px;
+  border: 2px solid var(--accent, #00e5ff);
+  background: #111;
+  flex-shrink: 0;
+}
+
+.presence-edit-avatar-preview img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.presence-edit-avatar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.presence-random-avatar-btn {
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: var(--accent, #00e5ff);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-family: var(--font-code, monospace);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.presence-random-avatar-btn:hover {
+  background: rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+/* Color Picker */
+.presence-color-picker-label {
+  font-size: 0.7rem;
+  color: #888;
+  font-family: var(--font-code, monospace);
+  margin-bottom: 6px;
+}
+
+.presence-color-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+
+.presence-color-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.presence-color-dot:hover {
+  transform: scale(1.15);
+}
+
+.presence-color-dot.selected {
+  border-color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Name Input */
+.presence-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.presence-form-label {
+  font-size: 0.7rem;
+  color: #888;
+  font-family: var(--font-code, monospace);
+}
+
+.presence-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: var(--font-code, monospace);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.presence-input:focus {
+  border-color: var(--accent, #00e5ff);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.25);
+}
+
+/* Edit Modal Buttons */
+.presence-edit-btn-row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.presence-btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #888;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-code, monospace);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.presence-btn-secondary:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.presence-btn-primary {
+  background: var(--accent, #00e5ff);
+  border: 1px solid var(--accent, #00e5ff);
+  color: #030303;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-code, monospace);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.presence-btn-primary:hover {
+  background: #00c4db;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+/* 5. RESPONSIVE QUERIES */
+@media (max-width: 768px) {
+  .presence-modal-overlay {
+    padding: 0;
+  }
+
+  .presence-panel {
+    max-width: 100%;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .nav-presence-btn .presence-label-text {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   6. LIVE REMOTE CURSORS (Figma / Tech Style)
+   ========================================================================== */
+.remote-cursors-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9995;
+  overflow: hidden;
+}
+
+.remote-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9996;
+  opacity: 0;
+  transition: transform 0.08s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.remote-cursor.active {
+  opacity: 1;
+}
+
+/* Custom Pointer Arrow */
+.remote-cursor-pointer-wrap {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.remote-cursor-svg {
+  width: 22px;
+  height: 22px;
+  transform-origin: 0 0;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.8));
+  display: block;
+}
+
+.remote-cursor-tip-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px currentColor;
+  transform: translate(-1px, -1px);
+}
+
+/* User Hologram Badge Pill */
+.remote-cursor-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(8, 12, 18, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px 4px 4px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 229, 255, 0.15);
+  white-space: nowrap;
+  user-select: none;
+  transform-origin: top left;
+  animation: cursor-tag-pop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cursor-tag-pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.remote-cursor-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid #fff;
+  flex-shrink: 0;
+  background: #111;
+}
+
+.remote-cursor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remote-cursor-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.remote-cursor-name {
+  font-size: 0.73rem;
+  font-weight: 700;
+  font-family: var(--font-code, monospace);
+  letter-spacing: 0.02em;
+}
+
+.remote-cursor-loc {
+  font-size: 0.62rem;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-code, monospace);
+}
+
+.remote-cursor-loc .presence-flag-img {
+  width: 14px;
+  height: 10px;
+}
+
+/* Click Shockwave Ring */
+.remote-cursor-click-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  transform: translate(-50%, -50%) scale(0.1);
+  opacity: 1;
+  pointer-events: none;
+  animation: cursor-shockwave 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes cursor-shockwave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.6);
+    opacity: 0;
+  }
+}

@@ -68,6 +68,20 @@ const i18n = {
         developed_by: "DESENVOLVIDO POR",
         btn_details: "DETALHES",
         modal_close: "[X] FECHAR",
+        presence_online: "ONLINE",
+        presence_title: "VISITANTES CONECTADOS",
+        presence_status_connected: "SISTEMA CONECTADO",
+        presence_sec_you: "SEU TERMINAL",
+        presence_badge_you: "VOCÊ",
+        presence_edit_btn: "[EDITAR]",
+        presence_sec_others: "OUTROS VISITANTES NAVEGANDO",
+        presence_empty: "NENHUM OUTRO VISITANTE CONECTADO NO MOMENTO",
+        presence_edit_title: "// EDITAR IDENTIDADE //",
+        presence_random_avatar: "🎲 NOVO AVATAR",
+        presence_color_label: "COR DO SINAL:",
+        presence_name_label: "CODINOME / APELIDO:",
+        presence_btn_cancel: "CANCELAR",
+        presence_btn_save: "SALVAR",
     },
     en: {
         loader: "SYSTEM_INITIATION",
@@ -137,6 +151,20 @@ const i18n = {
         developed_by: "DEVELOPED BY",
         btn_details: "DETAILS",
         modal_close: "[X] CLOSE",
+        presence_online: "ONLINE",
+        presence_title: "CONNECTED VISITORS",
+        presence_status_connected: "SYSTEM CONNECTED",
+        presence_sec_you: "YOUR TERMINAL",
+        presence_badge_you: "YOU",
+        presence_edit_btn: "[EDIT]",
+        presence_sec_others: "OTHER BROWSING VISITORS",
+        presence_empty: "NO OTHER VISITORS CONNECTED AT THIS TIME",
+        presence_edit_title: "// EDIT IDENTITY //",
+        presence_random_avatar: "🎲 NEW AVATAR",
+        presence_color_label: "SIGNAL COLOR:",
+        presence_name_label: "CODENAME / ALIAS:",
+        presence_btn_cancel: "CANCEL",
+        presence_btn_save: "SAVE",
     }
 };
 
@@ -146,6 +174,7 @@ const langToggleBtn = document.getElementById('lang-toggle');
 
 function setLanguage(lang) {
     currentLang = lang;
+    window.curriculoLang = lang;
     langToggleBtn.innerText = lang === 'pt' ? 'EN' : 'PT';
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -154,6 +183,10 @@ function setLanguage(lang) {
             el.innerHTML = i18n[lang][key];
         }
     });
+
+    if (window.presenceManager && typeof window.presenceManager.render === 'function') {
+        window.presenceManager.render();
+    }
 
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
