@@ -417,13 +417,15 @@
     }
 
     setupDOM() {
-      // 0. Remote Cursors Layer (Appended to smooth-content so cursors move with scroll)
-      const smoothContent = document.getElementById('smooth-content') || document.body;
-      if (!document.getElementById('remote-cursors-layer')) {
-        const cursorLayer = document.createElement('div');
+      // 0. Remote Cursors Layer (Appended to document.body so cursors track full document scroll)
+      let cursorLayer = document.getElementById('remote-cursors-layer');
+      if (!cursorLayer) {
+        cursorLayer = document.createElement('div');
         cursorLayer.id = 'remote-cursors-layer';
         cursorLayer.className = 'remote-cursors-layer';
-        smoothContent.appendChild(cursorLayer);
+        document.body.appendChild(cursorLayer);
+      } else if (cursorLayer.parentElement !== document.body) {
+        document.body.appendChild(cursorLayer);
       }
 
       // 1. Navbar presence trigger button
@@ -663,40 +665,72 @@
 
       // Live Cursors: track mouse movement and broadcast to other visitors
       let lastBroadcastTime = 0;
+      let lastClientX = 0;
+      let lastClientY = 0;
+      let hasMousePos = false;
+
+      const broadcastPos = () => {
+        if (!hasMousePos) return;
+        const scrollX = window.scrollX || window.pageXOffset || 0;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const x = Math.round(lastClientX + scrollX);
+        const y = Math.round(lastClientY + scrollY);
+
+        this.broadcast('cursor-move', {
+          userId: this.currentUser.id,
+          user: this.currentUser,
+          x,
+          y,
+        });
+        if (this.socket && this.socket.connected) {
+          this.socket.emit('cursor-change', {
+            pos: { x, y },
+          });
+        }
+      };
+
       window.addEventListener(
         'mousemove',
         (e) => {
+          lastClientX = e.clientX;
+          lastClientY = e.clientY;
+          hasMousePos = true;
           const now = Date.now();
           if (now - lastBroadcastTime > 40) {
             // ~25 fps throttle for silky smoothness
             lastBroadcastTime = now;
-            const x = Math.round(e.pageX);
-            const y = Math.round(e.pageY);
-            this.broadcast('cursor-move', {
-              userId: this.currentUser.id,
-              user: this.currentUser,
-              x,
-              y,
-            });
-            if (this.socket && this.socket.connected) {
-              this.socket.emit('cursor-change', {
-                pos: { x, y },
-              });
-            }
+            broadcastPos();
+          }
+        },
+        { passive: true }
+      );
+
+      // Keep cursor position synchronized during scroll (trackpad / wheel)
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!hasMousePos) return;
+          const now = Date.now();
+          if (now - lastBroadcastTime > 50) {
+            lastBroadcastTime = now;
+            broadcastPos();
           }
         },
         { passive: true }
       );
 
       document.addEventListener('mouseleave', () => {
+        hasMousePos = false;
         this.broadcast('cursor-leave', { userId: this.currentUser.id });
       });
 
       window.addEventListener(
         'mousedown',
         (e) => {
-          const x = Math.round(e.pageX);
-          const y = Math.round(e.pageY);
+          const scrollX = window.scrollX || window.pageXOffset || 0;
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          const x = Math.round(e.pageX !== undefined ? e.pageX : (e.clientX + scrollX));
+          const y = Math.round(e.pageY !== undefined ? e.pageY : (e.clientY + scrollY));
           this.broadcast('cursor-click', {
             userId: this.currentUser.id,
             color: this.currentUser.color,
@@ -712,11 +746,12 @@
       if (!userId || userId === this.currentUser.id) return;
       let cursorLayer = document.getElementById('remote-cursors-layer');
       if (!cursorLayer) {
-        const smoothContent = document.getElementById('smooth-content') || document.body;
         cursorLayer = document.createElement('div');
         cursorLayer.id = 'remote-cursors-layer';
         cursorLayer.className = 'remote-cursors-layer';
-        smoothContent.appendChild(cursorLayer);
+        document.body.appendChild(cursorLayer);
+      } else if (cursorLayer.parentElement !== document.body) {
+        document.body.appendChild(cursorLayer);
       }
 
       let cursorObj = this.remoteCursors.get(userId);
@@ -755,8 +790,9 @@
 
       const el = cursorObj.element;
       const maxW = Math.max(document.documentElement.scrollWidth, window.innerWidth);
-      const safeX = Math.max(0, Math.min(x, maxW - 40));
-      el.style.transform = `translate3d(${safeX}px, ${y}px, 0)`;
+      const safeX = Math.max(0, Math.min(Number(x) || 0, maxW - 40));
+      const safeY = Math.max(0, Number(y) || 0);
+      el.style.transform = `translate3d(${safeX}px, ${safeY}px, 0)`;
       el.classList.add('active');
 
       if (cursorObj.timeout) clearTimeout(cursorObj.timeout);
@@ -784,13 +820,13 @@
     }
 
     triggerRemoteClickRing(userId, color, x, y) {
-      const cursorLayer = document.getElementById('remote-cursors-layer');
+      let cursorLayer = document.getElementById('remote-cursors-layer');
       if (!cursorLayer) return;
 
       const ring = document.createElement('div');
       ring.className = 'remote-cursor-click-ring';
-      ring.style.left = `${x}px`;
-      ring.style.top = `${y}px`;
+      ring.style.left = `${Math.max(0, Number(x) || 0)}px`;
+      ring.style.top = `${Math.max(0, Number(y) || 0)}px`;
       ring.style.color = color || '#00e5ff';
       cursorLayer.appendChild(ring);
 

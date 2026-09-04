@@ -44,6 +44,14 @@ body {
   overflow-x: hidden;
   line-height: 1.6;
   cursor: auto;
+  position: relative;
+  min-height: 100vh;
+}
+
+#smooth-wrapper,
+#smooth-content {
+  position: relative;
+  width: 100%;
 }
 
 .code-font {
