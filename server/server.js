@@ -68,6 +68,9 @@ function broadcastUsers() {
   io.emit('users-updated', Array.from(users.values()));
 }
 
+// Keep all clients synchronized every 20s
+setInterval(broadcastUsers, 20000);
+
 io.on('connection', (socket) => {
   const sessionId = socket.handshake.auth?.sessionId || socket.id;
 
@@ -81,7 +84,7 @@ io.on('connection', (socket) => {
     avatar: String(Math.floor(Math.random() * 80) + 1),
     color: '#00e5ff',
     location: 'Online',
-    flag: '\uD83C\uDF10',
+    flag: '🌐',
     countryCode: '',
     isOnline: true,
     lastSeen: now,
@@ -90,6 +93,10 @@ io.on('connection', (socket) => {
 
   socket.emit('session', { sessionId });
   broadcastUsers();
+
+  socket.on('get-users', () => {
+    socket.emit('users-updated', Array.from(users.values()));
+  });
 
   socket.on('update-user', (data) => {
     const user = users.get(socket.id);

@@ -279,14 +279,16 @@
 
     startHeartbeat() {
       this.heartbeatTimer = setInterval(() => {
-        // Send heartbeat
+        // Send heartbeat across local tabs
         this.broadcast('heartbeat', this.currentUser);
 
-        // Prune stale tabs (no heartbeat in > 10s)
+        // Only prune local BroadcastChannel tabs (same-browser tabs without WebSocket).
+        // Never prune WebSocket users via client-side timeout: the server's 'users-updated' event
+        // authoritatively manages the presence lifecycle for connected visitors!
         const now = Date.now();
         let changed = false;
         for (const [id, user] of this.users.entries()) {
-          if (id !== this.currentUser.id && now - (user.lastSeen || 0) > 10000) {
+          if (!user.isMe && !user.isWebSocket && now - (user.lastSeen || 0) > 10000) {
             this.users.delete(id);
             this.removeRemoteCursor(id);
             changed = true;
@@ -312,7 +314,11 @@
         this.socket.on('connect', () => {
           console.log('[presence] Socket connected:', this.socket.id);
           this.updateConnectionStatus('connected');
-          // Sync our profile to the server
+          if (this.currentUser) {
+            this.currentUser.socketId = this.socket.id;
+          }
+          // Request current user list immediately & sync our profile
+          this.socket.emit('get-users');
           this._emitUpdateUser();
         });
 
@@ -331,37 +337,55 @@
         this.socket.on('users-updated', (remoteUsers) => {
           if (!Array.isArray(remoteUsers)) return;
 
-          // Build a Set of active socket IDs from the server
+          // Build sets of active socket IDs and session IDs from the server
           const activeSocketIds = new Set();
+          const activeSessionIds = new Set();
 
           remoteUsers.forEach((u) => {
-            // u.socketId is the server-side socket id, u.id is the session id
-            const key = u.socketId || u.id;
-            activeSocketIds.add(key);
+            if (u.socketId) activeSocketIds.add(u.socketId);
+            if (u.id) activeSessionIds.add(u.id);
 
-            // Skip ourselves (match by session id stored in currentUser.id)
-            if (u.id === this.currentUser.id || u.socketId === this.socket.id) return;
+            // Skip ourselves
+            const isMyself =
+              (u.id && u.id === this.currentUser.id) ||
+              (u.socketId && this.socket && u.socketId === this.socket.id);
+            if (isMyself) {
+              if (u.socketId && this.currentUser) {
+                this.currentUser.socketId = u.socketId;
+              }
+              return;
+            }
+
+            const key = u.socketId || u.id;
+            const existing = this.users.get(key) || this.users.get(u.socketId) || this.users.get(u.id);
 
             this.users.set(key, {
               id: key,
               socketId: u.socketId,
               sessionId: u.id,
-              name: u.name || 'Visitor',
-              avatar: u.avatar || '1',
-              color: u.color || '#60a5fa',
-              location: u.location || 'Online',
-              flag: u.flag || '\uD83C\uDF10',
-              countryCode: u.countryCode || '',
+              name: u.name || (existing && existing.name) || 'Visitor',
+              avatar: u.avatar || (existing && existing.avatar) || '1',
+              color: u.color || (existing && existing.color) || '#60a5fa',
+              location: u.location || (existing && existing.location) || 'Online',
+              flag: u.flag || (existing && existing.flag) || '🌐',
+              countryCode: u.countryCode || (existing && existing.countryCode) || '',
               lastSeen: Date.now(),
               isMe: false,
+              isWebSocket: true,
             });
           });
 
-          // Remove users no longer on the server
+          // Remove WebSocket users no longer on the server
           for (const [id, user] of this.users.entries()) {
-            if (!user.isMe && !activeSocketIds.has(id)) {
-              this.users.delete(id);
-              this.removeRemoteCursor(id);
+            if (!user.isMe && user.isWebSocket) {
+              const stillActive =
+                activeSocketIds.has(id) ||
+                (user.socketId && activeSocketIds.has(user.socketId)) ||
+                (user.sessionId && activeSessionIds.has(user.sessionId));
+              if (!stillActive) {
+                this.users.delete(id);
+                this.removeRemoteCursor(id);
+              }
             }
           }
 
@@ -373,20 +397,42 @@
           if (!data || !data.pos || !data.socketId) return;
           if (data.socketId === this.socket.id) return; // skip our own echo
 
-          // Find the user by their socket id
+          // Find the user by their socket id or session id
           let remoteUser = this.users.get(data.socketId);
+          if (!remoteUser) {
+            for (const u of this.users.values()) {
+              if (u.socketId === data.socketId) {
+                remoteUser = u;
+                break;
+              }
+            }
+          }
+
+          let isNewUser = false;
           if (!remoteUser) {
             remoteUser = {
               id: data.socketId,
+              socketId: data.socketId,
               name: 'Visitor',
               avatar: '1',
               color: '#00e5ff',
               location: 'Online',
-              flag: '\uD83C\uDF10',
+              flag: '🌐',
               countryCode: '',
+              lastSeen: Date.now(),
+              isMe: false,
+              isWebSocket: true,
             };
+            this.users.set(data.socketId, remoteUser);
+            isNewUser = true;
+          } else {
+            remoteUser.lastSeen = Date.now();
           }
+
           this.updateRemoteCursor(data.socketId, remoteUser, data.pos.x, data.pos.y);
+          if (isNewUser) {
+            this.render();
+          }
         });
 
         // Reconnect on wake/focus
@@ -898,14 +944,25 @@
 
     getAllDisplayUsers() {
       const list = [];
-      // 1. Current user
+      const seen = new Set();
+
+      // 1. Current user always first
       list.push(this.currentUser);
+      seen.add(this.currentUser.id);
+      if (this.currentUser.socketId) seen.add(this.currentUser.socketId);
+      if (this.socket && this.socket.id) seen.add(this.socket.id);
 
       // 2. Real other users from BroadcastChannel or WebSocket
       for (const [id, u] of this.users.entries()) {
-        if (id !== this.currentUser.id) {
-          list.push(u);
-        }
+        if (u.isMe) continue;
+        if (seen.has(id)) continue;
+        if (u.sessionId && seen.has(u.sessionId)) continue;
+        if (u.socketId && seen.has(u.socketId)) continue;
+
+        seen.add(id);
+        if (u.sessionId) seen.add(u.sessionId);
+        if (u.socketId) seen.add(u.socketId);
+        list.push(u);
       }
 
       return list;
